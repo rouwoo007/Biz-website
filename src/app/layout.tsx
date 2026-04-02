@@ -15,11 +15,11 @@ const geistSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://fixitup.com.au"),
   title: {
-    default: "Fix It Up Pty Ltd | Commercial Shopfitting & Joinery Brisbane",
+    default: "Fix It Up | Commercial Shopfitting & Joinery Brisbane",
     template: "%s | Fix It Up Pty Ltd",
   },
   description:
-    "Fix It Up Pty Ltd — QBCC licensed commercial shopfitting, joinery manufacturing & fitout specialists in Brisbane & South East Queensland. Call for a free quote.",
+    "Fix It Up Pty Ltd — QBCC licensed commercial shopfitting, joinery & fitout specialists in Brisbane & South East Queensland.",
   keywords: [
     "commercial shopfitting Brisbane",
     "joinery manufacturing QLD",

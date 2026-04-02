@@ -4,6 +4,13 @@ import { company } from '@/data/company';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
+  description:
+    'Contact Fix It Up for commercial shopfitting & fitout enquiries in Brisbane & SEQ. Call us or request a free quote online.',
+  openGraph: {
+    title: 'Contact Us | Fix It Up Pty Ltd',
+    description:
+      'Get in touch with Brisbane\'s trusted commercial shopfitting team. Free quotes available.',
+  },
 };
 
 export default function ContactPage() {

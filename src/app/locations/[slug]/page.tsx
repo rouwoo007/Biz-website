@@ -18,12 +18,13 @@ export async function generateMetadata({
   const location = getLocationBySlug(params.slug);
   if (!location) return {};
 
+  const shortDesc = `QBCC licensed commercial shopfitting & joinery in ${location.name}. Fix It Up delivers fitouts for retail, hospitality, medical & office spaces.`;
   return {
     title: `Commercial Shopfitting in ${location.name}`,
-    description: location.description,
+    description: shortDesc,
     openGraph: {
       title: `Commercial Shopfitting in ${location.name} | Fix It Up Pty Ltd`,
-      description: location.description,
+      description: shortDesc,
     },
   };
 }

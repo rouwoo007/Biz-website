@@ -4,7 +4,11 @@ import { company } from '@/data/company';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: `Learn about ${company.name} — a Brisbane-based commercial shopfitting and joinery company with ${company.yearsExperience} years of experience delivering quality fitouts across South East Queensland.`,
+  description: `Learn about ${company.name} — Brisbane commercial shopfitting & joinery with ${company.yearsExperience} years experience across South East Queensland.`,
+  openGraph: {
+    title: `About ${company.name}`,
+    description: `QBCC licensed commercial shopfitting company with ${company.yearsExperience} years experience in Brisbane & South East Queensland.`,
+  },
 };
 
 const values = [

@@ -7,7 +7,7 @@ import CTASection from '@/components/CTASection';
 export const metadata: Metadata = {
   title: 'Our Services',
   description:
-    'Fix It Up Pty Ltd offers expert commercial shopfitting, joinery manufacturing, retail, cafe, medical, dental and office fitouts across Brisbane and South East Queensland.',
+    'Expert commercial shopfitting, joinery, retail, cafe, medical and office fitouts across Brisbane & South East Queensland.',
 };
 
 function ServiceIcon({ icon }: { icon: string }) {

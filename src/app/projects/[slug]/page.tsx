@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${project.name} | Projects | Fix It Up Pty Ltd`,
+    title: `${project.name} — ${project.typeLabel} Project`,
     description: project.description.slice(0, 160),
   };
 }
