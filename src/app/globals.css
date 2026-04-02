@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Variables ───────────────────────────────────────────── */
+:root {
+  --background: #0A1628;
+  --foreground: #ffffff;
+  --navy:        #0A1628;
+  --navy-800:    #0d1e38;
+  --navy-700:    #112548;
+  --orange:      #F97316;
+  --orange-600:  #ea6c0f;
+  --orange-400:  #fb923c;
+}
+
+/* ─── Base Reset & Globals ────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--navy);
+    color: var(--foreground);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+
+  /* Links */
+  a {
+    color: var(--orange);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  a:hover {
+    color: var(--orange-400);
+  }
+
+  /* Horizontal rule */
+  hr {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Focus ring — accessible & on-brand */
+  *:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar (Webkit) */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--navy-800); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy-700);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+}
+
+/* ─── Component Layer ─────────────────────────────────────────── */
+@layer components {
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-orange-500 text-white hover:bg-orange-600 active:scale-95 shadow-orange-glow;
+  }
+
+  .btn-outline {
+    @apply btn border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply btn text-white/70 hover:text-white hover:bg-white/5;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-2xl bg-navy-800 border border-white/5 shadow-card p-6;
+  }
+
+  .card-hover {
+    @apply card transition-transform duration-200 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-orange-glow;
+  }
+
+  /* Section wrapper */
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  /* Section headings */
+  .section-label {
+    @apply text-orange-500 text-sm font-semibold uppercase tracking-widest mb-3;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-white leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-white/60 text-lg mt-4 max-w-2xl;
+  }
+
+  /* Orange accent divider */
+  .divider-orange {
+    @apply block w-12 h-1 bg-orange-500 rounded-full mt-4 mb-6;
+  }
+
+  /* Form inputs */
+  .form-label {
+    @apply block text-sm font-medium text-white/70 mb-1.5;
+  }
+
+  .form-input {
+    @apply w-full rounded-lg bg-navy-700 border border-white/10 px-4 py-3 text-white placeholder-white/30
+           text-sm transition-colors duration-200
+           focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:outline-none;
+  }
+
+  .form-textarea {
+    @apply form-input resize-y min-h-[120px];
+  }
+
+  .form-select {
+    @apply form-input appearance-none cursor-pointer;
+  }
+
+  .form-error {
+    @apply text-red-400 text-xs mt-1;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .badge-orange {
+    @apply badge bg-orange-500/10 text-orange-400 border border-orange-500/20;
+  }
+
+  .badge-navy {
+    @apply badge bg-white/5 text-white/70 border border-white/10;
+  }
+
+  /* Navigation link */
+  .nav-link {
+    @apply text-white/70 text-sm font-medium hover:text-white transition-colors duration-150;
+  }
+
+  .nav-link-active {
+    @apply text-orange-500 font-semibold;
+  }
+}
+
+/* ─── Utility Layer ───────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text — for hero headlines */
+  .text-gradient {
+    @apply bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-orange {
+    @apply bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent;
+  }
+
+  /* Subtle background patterns */
+  .bg-grid-navy {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Orange bottom border accent */
+  .border-b-orange {
+    border-bottom: 2px solid var(--orange);
+  }
+
+  /* Muted text shorthands */
+  .text-muted  { @apply text-white/50; }
+  .text-subtle { @apply text-white/70; }
+}
