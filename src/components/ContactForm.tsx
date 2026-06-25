@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
@@ -16,6 +17,10 @@ const projectTypes = [
   { value: 'other', label: 'Other' },
 ];
 
+// Map a stored option value back to its human-readable label for the email.
+const labelFor = (options: { value: string; label: string }[], value: string) =>
+  options.find((o) => o.value === value)?.label ?? value;
+
 const contactSchema = z.object({
   name: z.string().min(2, 'Full name must be at least 2 characters'),
   company: z.string().optional(),
@@ -27,7 +32,9 @@ const contactSchema = z.object({
   projectType: z
     .string()
     .min(1, 'Please select a project type'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  message: z.string().optional(),
+  // Honeypot — must stay empty. Hidden from humans; bots tend to fill it.
+  company_website: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -37,14 +44,70 @@ export default function ContactForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: standardSchemaResolver(contactSchema),
   });
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    reset();
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  // True only after hydration — keeps the submit button inert until JS is ready,
+  // so the form can never fall back to a native (non-JS) GET submission that
+  // would leak data into the URL and skip the email send.
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => setHasMounted(true), []);
+
+  const onSubmit = async (data: ContactFormData) => {
+    setSubmitError(null);
+    setIsSuccess(false);
+
+    // Silently drop bot submissions (honeypot field filled in).
+    if (data.company_website) {
+      setIsSuccess(true);
+      reset();
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError(
+        'The enquiry form is not fully set up yet. Please email fixitup@outlook.com or call 0410 829 334 and we’ll help you straight away.'
+      );
+      return;
+    }
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New Enquiry — ${data.name}`,
+          from_name: 'Fix It Up Website',
+          replyto: data.email,
+          // Human-readable fields land directly in the notification email.
+          Name: data.name,
+          Company: data.company || '—',
+          Phone: data.phone,
+          Email: data.email,
+          'Project Type': labelFor(projectTypes, data.projectType),
+          Message: data.message || '—',
+        }),
+      });
+
+      const result = await res.json();
+      if (!res.ok || !result.success) {
+        throw new Error(result?.message || 'Submission failed. Please try again.');
+      }
+
+      setIsSuccess(true);
+      reset();
+    } catch {
+      setSubmitError(
+        'Sorry, we couldn’t send your enquiry just now. Please try again, or email fixitup@outlook.com directly.'
+      );
+    }
   };
 
   const inputBase =
@@ -60,6 +123,18 @@ export default function ContactForm() {
       noValidate
       className="flex flex-col gap-5"
     >
+      {/* Honeypot: hidden from real users, catches spam bots that auto-fill fields. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="contact-company-website">Company website</label>
+        <input
+          id="contact-company-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register('company_website')}
+        />
+      </div>
+
       {/* Name */}
       <div>
         <label htmlFor="contact-name" className={labelBase}>
@@ -176,7 +251,8 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="contact-message" className={labelBase}>
-          Message <span className="text-copper-600">*</span>
+          Message{' '}
+          <span className="text-gray-500 font-normal">(optional)</span>
         </label>
         <textarea
           id="contact-message"
@@ -194,19 +270,26 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Status banner (success / submission feedback) */}
+      {/* Status banner (success / error feedback) */}
       <div role="status" aria-live="polite">
-        {isSubmitSuccessful && (
+        {isSuccess && (
           <p className="text-sm text-copper-700 bg-copper-50 border border-copper-200 rounded-lg px-4 py-3">
             Thank you &mdash; your enquiry has been received. We&apos;ll be in touch shortly!
           </p>
         )}
       </div>
+      {submitError && (
+        <div role="alert">
+          <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+            {submitError}
+          </p>
+        </div>
+      )}
 
       {/* Submit */}
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !hasMounted}
         className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-copper-600 text-white text-sm font-semibold hover:bg-copper-700 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (

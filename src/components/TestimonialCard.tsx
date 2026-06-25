@@ -8,11 +8,11 @@ interface TestimonialCardProps {
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5" aria-label={`${rating} out of 5 stars`}>
+    <div className="flex items-center gap-1" role="img" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i < rating ? 'text-copper-500' : 'text-gray-200'}`}
+          className={`w-5 h-5 ${i < rating ? 'text-copper-500' : 'text-gray-200'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -24,41 +24,51 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+function initials(name: string) {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+}
+
 export default function TestimonialCard({ quote, name, company, role, rating }: TestimonialCardProps) {
   return (
-    <div className="flex flex-col bg-white rounded-2xl shadow-card border border-gray-100 p-6 hover:shadow-card-hover transition-shadow duration-300">
-      {/* Stars */}
+    <figure className="group relative flex flex-col h-full overflow-hidden rounded-3xl bg-white border border-charcoal/10 p-8 sm:p-10 transition-all duration-300 hover:-translate-y-1 hover:shadow-float-lg hover:border-copper-200">
+      {/* Oversized decorative quote mark */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-6 right-6 text-[9rem] leading-none font-serif text-copper-500/10 select-none transition-colors duration-300 group-hover:text-copper-500/20"
+      >
+        &rdquo;
+      </span>
+
       <StarRating rating={rating} />
 
-      {/* Quote mark */}
-      <svg
-        className="w-8 h-8 text-copper-100 mt-4 flex-shrink-0"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-      </svg>
-
-      {/* Quote text */}
-      <blockquote className="mt-3 flex-1">
-        <p className="text-sm text-gray-600 leading-relaxed italic">{quote}</p>
+      <blockquote className="relative mt-6 flex-1">
+        <p className="text-lg sm:text-xl text-charcoal/85 leading-relaxed font-medium">
+          &ldquo;{quote}&rdquo;
+        </p>
       </blockquote>
 
-      {/* Divider */}
-      <div className="mt-5 pt-4 border-t border-gray-100">
-        <p className="text-sm font-semibold text-charcoal">{name}</p>
-        <p className="text-xs text-gray-500 mt-0.5">
-          {role}
-          {company && (
-            <>
-              {' '}
-              &mdash;{' '}
-              <span className="text-copper-600 font-medium">{company}</span>
-            </>
-          )}
-        </p>
-      </div>
-    </div>
+      <figcaption className="mt-8 flex items-center gap-4 pt-6 border-t border-charcoal/10">
+        <span className="flex-shrink-0 grid place-items-center w-12 h-12 rounded-full bg-gradient-to-br from-copper-500 to-copper-700 text-white font-bold text-sm shadow-copper-glow">
+          {initials(name)}
+        </span>
+        <div>
+          <p className="text-base font-bold text-charcoal leading-tight">{name}</p>
+          <p className="text-sm text-gray-500 mt-0.5">
+            {role}
+            {company && (
+              <>
+                {' '}&middot;{' '}
+                <span className="text-copper-600 font-medium">{company}</span>
+              </>
+            )}
+          </p>
+        </div>
+      </figcaption>
+    </figure>
   );
 }

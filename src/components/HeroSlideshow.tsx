@@ -66,7 +66,7 @@ export default function HeroSlideshow({ images, interval = 5000 }: HeroSlideshow
             fill
             priority={index === 0}
             className={`object-cover transition-opacity duration-1000 ease-in-out ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
+              index === currentIndex ? 'opacity-100 animate-kenburns' : 'opacity-0'
             }`}
             sizes="100vw"
           />

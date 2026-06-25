@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { z } from 'zod';
@@ -503,6 +503,16 @@ function Step3({
 
 // --- Shared navigation buttons -----------------------------------------------
 
+// True only after the component has hydrated in the browser. Used to keep the
+// submit button inert until JS is ready, so the form can never fall back to a
+// native (non-JS) GET submission that would leak data into the URL and skip the
+// email send.
+function useHasMounted() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
+
 function StepNavigation({
   step,
   onBack,
@@ -513,6 +523,7 @@ function StepNavigation({
   isSubmitting?: boolean;
 }) {
   const isLast = step === 3;
+  const hasMounted = useHasMounted();
 
   return (
     <div className={`flex gap-3 pt-2 ${step > 1 ? 'justify-between' : 'justify-end'}`}>
@@ -537,7 +548,7 @@ function StepNavigation({
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !hasMounted}
         className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isLast ? (

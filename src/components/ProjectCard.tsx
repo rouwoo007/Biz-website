@@ -14,7 +14,6 @@ export default function ProjectCard({ name, slug, typeLabel, photo }: ProjectCar
     <Link
       href={`/projects/${slug}`}
       className="group block relative overflow-hidden rounded-2xl shadow-card bg-gray-100 aspect-[4/3] hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
-      aria-label={`View project: ${name}`}
     >
       {/* Project image */}
       <Image

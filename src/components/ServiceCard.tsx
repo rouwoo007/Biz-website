@@ -24,9 +24,9 @@ export default function ServiceCard({ slug, title, shortDescription, icon }: Ser
       <Link
         href={`/services/${slug}`}
         className="inline-flex items-center gap-1.5 mt-4 min-h-[44px] text-sm font-semibold text-copper-700 hover:text-copper-800 transition-colors group/link"
-        aria-label={`Learn more about ${title}`}
       >
         Learn More
+        <span className="sr-only"> about {title}</span>
         <svg
           className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
           fill="none"

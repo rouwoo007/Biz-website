@@ -211,7 +211,44 @@
 
   .text-muted  { @apply text-gray-500; }
   .text-subtle { @apply text-gray-500; }
+
+  /* Scroll-reveal (toggled by the <Reveal> client component) */
+  .reveal-init {
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: opacity, transform;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Edge-fade mask for marquees */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  /* Layered noise + copper bloom backdrop for dark sections */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .text-stroke-cream {
+    -webkit-text-stroke: 1px rgba(248, 247, 243, 0.25);
+    color: transparent;
+  }
 }
+
+/* --- Keyframes (reduced-motion aware via the media query below) ----- */
+@keyframes kenburns {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.12) translate3d(-1.5%, -1.5%, 0); }
+}
+.animate-kenburns { animation: kenburns 14s ease-out both; }
 
 /* --- Reduced Motion ------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
