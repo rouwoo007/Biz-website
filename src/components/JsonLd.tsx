@@ -15,7 +15,7 @@ export default function JsonLd() {
     name: company.name,
     alternateName: 'Fix It Up Shopfitters',
     description: company.tagline,
-    url: 'https://www.fixitup.com.au',
+    url: 'https://fixitup.au',
     telephone: company.phone,
     email: company.email,
     priceRange: '$$',

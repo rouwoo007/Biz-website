@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   },
   description:
     "Browse Fix It Up Pty Ltd's portfolio of completed commercial shopfitting, joinery and fitout projects across Brisbane & South East Queensland.",
+  alternates: {
+    canonical: "/projects",
+  },
   openGraph: {
     title: "Our Projects | Fix It Up Pty Ltd",
     description:

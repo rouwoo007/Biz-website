@@ -1,6 +1,7 @@
 export interface Service {
   slug: string;
   title: string;
+  metaTitle: string;
   shortDescription: string;
   description: string;
   icon: string;
@@ -13,6 +14,7 @@ export const services: Service[] = [
   {
     slug: 'shopfitting',
     title: 'Shopfitting',
+    metaTitle: 'Shopfitting Brisbane | Commercial Shopfitters | Fix It Up',
     shortDescription:
       'End-to-end shopfitting solutions for retail, hospitality and commercial spaces across Brisbane and South East Queensland.',
     description:
@@ -85,6 +87,7 @@ export const services: Service[] = [
   {
     slug: 'commercial-fitout',
     title: 'Commercial Fitout',
+    metaTitle: 'Commercial Fitout Brisbane | Office & Retail Fitouts',
     shortDescription:
       'Turnkey commercial fitout services for offices, showrooms, gyms and mixed-use spaces throughout Brisbane and SEQ.',
     description:
@@ -157,6 +160,7 @@ export const services: Service[] = [
   {
     slug: 'joinery-manufacturing',
     title: 'Joinery Manufacturing',
+    metaTitle: 'Commercial Joinery Brisbane | Custom Joinery Manufacturing',
     shortDescription:
       'Custom commercial joinery manufactured in our Brisbane workshop and installed by our own tradespeople across SEQ.',
     description:
@@ -229,6 +233,7 @@ export const services: Service[] = [
   {
     slug: 'cafe-restaurant-fitout',
     title: 'Cafe & Restaurant Fitout',
+    metaTitle: 'Cafe & Restaurant Fitouts Brisbane | Hospitality Fitout',
     shortDescription:
       'Atmospheric cafe and restaurant fitouts that balance great design, commercial kitchen compliance and guest experience.',
     description:
@@ -301,6 +306,7 @@ export const services: Service[] = [
   {
     slug: 'retail-fitout',
     title: 'Retail Fitout',
+    metaTitle: 'Retail Fitout Brisbane | Retail Shopfitters QLD',
     shortDescription:
       'Retail fitouts engineered to maximise dwell time, drive sales and deliver a standout brand experience in every store.',
     description:
@@ -373,6 +379,7 @@ export const services: Service[] = [
   {
     slug: 'medical-dental-fitout',
     title: 'Medical & Dental Fitout',
+    metaTitle: 'Medical & Dental Fitout Brisbane | Clinic Fitouts',
     shortDescription:
       'Compliant, functional and welcoming medical and dental fitouts for GPs, specialists, allied health and dental practices.',
     description:
@@ -445,6 +452,7 @@ export const services: Service[] = [
   {
     slug: 'office-fitout',
     title: 'Office Fitout',
+    metaTitle: 'Office Fitout Brisbane | Workplace Fitout Specialists',
     shortDescription:
       'Productive, inspiring office fitouts designed around the way your team works — from open-plan to collaborative and hybrid.',
     description:

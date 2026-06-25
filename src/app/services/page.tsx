@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Our Services',
   description:
     'Expert commercial shopfitting, joinery, retail, cafe, medical and office fitouts across Brisbane & South East Queensland.',
+  alternates: {
+    canonical: '/services',
+  },
 };
 
 function ServiceIcon({ icon }: { icon: string }) {

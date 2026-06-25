@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const BASE_URL = "https://fixitup.com.au";
+const BASE_URL = "https://fixitup.au";
 
 const services = [
   "shopfitting",

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import ServiceCard from '@/components/ServiceCard';
 import ProjectCard from '@/components/ProjectCard';
@@ -17,6 +18,12 @@ const heroImages = [
   '/images/Curva_107 Coffee_8.jpg',
   '/images/DSC00719.jpg',
 ];
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 // --- Service icon map --------------------------------------------------------
 const serviceIcons: Record<string, React.ReactNode> = {
