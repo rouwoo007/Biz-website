@@ -12,7 +12,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i < rating ? 'text-orange' : 'text-gray-300'}`}
+          className={`w-4 h-4 ${i < rating ? 'text-copper-500' : 'text-gray-200'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -26,13 +26,13 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function TestimonialCard({ quote, name, company, role, rating }: TestimonialCardProps) {
   return (
-    <div className="flex flex-col bg-white rounded-2xl shadow-card border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
+    <div className="flex flex-col bg-white rounded-2xl shadow-card border border-gray-100 p-6 hover:shadow-card-hover transition-shadow duration-300">
       {/* Stars */}
       <StarRating rating={rating} />
 
       {/* Quote mark */}
       <svg
-        className="w-8 h-8 text-orange/20 mt-4 flex-shrink-0"
+        className="w-8 h-8 text-copper-100 mt-4 flex-shrink-0"
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -47,14 +47,14 @@ export default function TestimonialCard({ quote, name, company, role, rating }: 
 
       {/* Divider */}
       <div className="mt-5 pt-4 border-t border-gray-100">
-        <p className="text-sm font-semibold text-navy">{name}</p>
+        <p className="text-sm font-semibold text-charcoal">{name}</p>
         <p className="text-xs text-gray-500 mt-0.5">
           {role}
           {company && (
             <>
               {' '}
               &mdash;{' '}
-              <span className="text-orange font-medium">{company}</span>
+              <span className="text-copper-600 font-medium">{company}</span>
             </>
           )}
         </p>

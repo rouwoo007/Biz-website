@@ -16,48 +16,47 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="bg-navy-800 border-b border-white/10">
+      {/* -- Hero ------------------------------------------------------------ */}
+      <section className="bg-cream border-b border-gray-100">
         <div className="container mx-auto py-14 sm:py-20">
-          {/* Orange accent bar */}
           <div className="mb-5">
-            <span className="inline-block w-10 h-1 rounded-full bg-orange" />
+            <span className="inline-block w-10 h-1 rounded-full bg-copper-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-charcoal leading-tight">
             Contact Us
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-white/60 max-w-xl leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-gray-500 max-w-xl leading-relaxed">
             Have a project in mind or need a free quote? Reach out to the Fix It
             Up team — we typically respond within one business day.
           </p>
         </div>
       </section>
 
-      {/* ── Two-column content ───────────────────────────── */}
-      <section className="bg-navy">
+      {/* -- Two-column content ---------------------------------------------- */}
+      <section className="bg-white">
         <div className="container mx-auto py-14 sm:py-20">
           <div className="grid lg:grid-cols-2 gap-10 xl:gap-16 items-start">
 
-            {/* ── Left: Contact Form ─────────────────────── */}
+            {/* -- Left: Contact Form ---------------------------------------- */}
             <div>
               <ContactForm />
             </div>
 
-            {/* ── Right: Details + Map ───────────────────── */}
+            {/* -- Right: Details + Map -------------------------------------- */}
             <div className="flex flex-col gap-8">
 
               {/* Contact details card */}
-              <div className="rounded-xl bg-navy-800 border border-white/10 p-6 sm:p-8">
-                <h2 className="text-lg font-bold text-white mb-6">
+              <div className="rounded-xl bg-cream border border-gray-100 p-6 sm:p-8">
+                <h2 className="text-lg font-bold text-charcoal mb-6">
                   Get in Touch
                 </h2>
 
                 <ul className="space-y-5">
                   {/* Address */}
                   <li className="flex items-start gap-4">
-                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-orange/10 flex items-center justify-center">
+                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-copper-50 flex items-center justify-center">
                       <svg
-                        className="w-4 h-4 text-orange"
+                        className="w-4 h-4 text-copper-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -76,10 +75,10 @@ export default function ContactPage() {
                       </svg>
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
                         Address
                       </p>
-                      <address className="not-italic text-sm text-white/80 leading-relaxed">
+                      <address className="not-italic text-sm text-charcoal/80 leading-relaxed">
                         {company.address.street}
                         <br />
                         {company.address.suburb} {company.address.state}{' '}
@@ -90,9 +89,9 @@ export default function ContactPage() {
 
                   {/* Phone */}
                   <li className="flex items-start gap-4">
-                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-orange/10 flex items-center justify-center">
+                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-copper-50 flex items-center justify-center">
                       <svg
-                        className="w-4 h-4 text-orange"
+                        className="w-4 h-4 text-copper-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -106,12 +105,12 @@ export default function ContactPage() {
                       </svg>
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
                         Phone
                       </p>
                       <a
                         href={`tel:${company.phone.replace(/\s/g, '')}`}
-                        className="text-sm text-white/80 hover:text-orange transition-colors"
+                        className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors"
                       >
                         {company.phone}
                       </a>
@@ -120,9 +119,9 @@ export default function ContactPage() {
 
                   {/* Email */}
                   <li className="flex items-start gap-4">
-                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-orange/10 flex items-center justify-center">
+                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-copper-50 flex items-center justify-center">
                       <svg
-                        className="w-4 h-4 text-orange"
+                        className="w-4 h-4 text-copper-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -136,12 +135,12 @@ export default function ContactPage() {
                       </svg>
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
                         Email
                       </p>
                       <a
                         href={`mailto:${company.email}`}
-                        className="text-sm text-white/80 hover:text-orange transition-colors break-all"
+                        className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors break-all"
                       >
                         {company.email}
                       </a>
@@ -150,21 +149,21 @@ export default function ContactPage() {
                 </ul>
 
                 {/* Divider */}
-                <div className="mt-6 pt-6 border-t border-white/10">
-                  <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-2">
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                     Business Hours
                   </p>
-                  <p className="text-sm text-white/70">
+                  <p className="text-sm text-charcoal/70">
                     Monday – Friday &nbsp;·&nbsp; 7:00 am – 5:00 pm
                   </p>
-                  <p className="text-sm text-white/50">
+                  <p className="text-sm text-gray-400">
                     Closed weekends &amp; public holidays
                   </p>
                 </div>
               </div>
 
               {/* Google Maps embed */}
-              <div className="rounded-xl overflow-hidden border border-white/10 shadow-card aspect-video lg:aspect-[4/3]">
+              <div className="rounded-xl overflow-hidden border border-gray-100 shadow-card aspect-video lg:aspect-[4/3]">
                 <iframe
                   title="Fix It Up Pty Ltd location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3537.5!2d152.9!3d-27.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDMwJzAwLjAiUyAxNTLCsDU0JzAwLjAiRQ!5e0!3m2!1sen!2sau!4v1234567890"

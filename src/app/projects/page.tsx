@@ -15,15 +15,15 @@ export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-navy py-16 sm:py-20">
+      <section className="bg-cream py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex justify-center mb-4">
-            <span className="inline-block w-12 h-1 rounded-full bg-orange" />
+            <span className="inline-block w-12 h-1 rounded-full bg-copper-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-charcoal leading-tight">
             Our Projects
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
             Browse our portfolio of commercial fitouts across South East Queensland — from specialty
             cafes and retail boutiques to medical centres and hospitality venues.
           </p>
@@ -41,8 +41,8 @@ export default function ProjectsPage() {
                 onClick={() => setActiveFilter(category.value)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 ${
                   activeFilter === category.value
-                    ? 'bg-orange text-white shadow-md'
-                    : 'bg-navy-800 bg-[#0d1e38] text-white/80 hover:bg-[#162440] hover:text-white'
+                    ? 'bg-copper-500 text-white shadow-md'
+                    : 'bg-gray-100 text-charcoal/70 hover:bg-gray-200 hover:text-charcoal'
                 }`}
               >
                 {category.label}

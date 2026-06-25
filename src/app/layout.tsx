@@ -51,7 +51,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={geistSans.variable}>
-      <body className="font-sans bg-navy text-white antialiased">
+      <body className="font-sans bg-white text-charcoal antialiased">
         <GoogleAnalytics />
         <JsonLd />
         <Navbar />

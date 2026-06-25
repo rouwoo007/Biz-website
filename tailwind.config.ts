@@ -19,17 +19,27 @@ const config: Config = {
     },
     extend: {
       colors: {
-        navy: {
-          DEFAULT: "#0A1628",
-          800: "#0d1e38",
-          700: "#112548",
-          600: "#163060",
+        cream: {
+          DEFAULT: "#F8F7F3",
+          dark: "#EFECE7",
         },
-        orange: {
-          DEFAULT: "#F97316",
-          600: "#ea6c0f",
-          400: "#fb923c",
-          100: "#ffedd5",
+        charcoal: {
+          DEFAULT: "#1a1a1a",
+          light: "#2d2d2d",
+          muted: "#4a4a4a",
+        },
+        copper: {
+          DEFAULT: "#b5553a",
+          50: "#fdf4f1",
+          100: "#f8ddd5",
+          200: "#f0b8a6",
+          300: "#e08e72",
+          400: "#cc6e4e",
+          500: "#b5553a",
+          600: "#97452f",
+          700: "#793826",
+          800: "#5c2b1d",
+          900: "#3e1d13",
         },
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -42,8 +52,9 @@ const config: Config = {
         "2xs": ["0.65rem", { lineHeight: "1rem" }],
       },
       boxShadow: {
-        "orange-glow": "0 0 20px rgba(249, 115, 22, 0.25)",
-        card: "0 4px 24px rgba(0, 0, 0, 0.18)",
+        "copper-glow": "0 0 20px rgba(181, 85, 58, 0.25)",
+        card: "0 2px 16px rgba(0, 0, 0, 0.06)",
+        "card-hover": "0 8px 30px rgba(0, 0, 0, 0.1)",
       },
       borderRadius: {
         "4xl": "2rem",

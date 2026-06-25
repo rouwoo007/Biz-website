@@ -43,7 +43,6 @@ export default function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Simulate a brief network delay
     await new Promise((resolve) => setTimeout(resolve, 600));
     alert(
       `Thank you, ${data.name}! Your enquiry has been received. We'll be in touch shortly.`
@@ -52,11 +51,11 @@ export default function ContactForm() {
   };
 
   const inputBase =
-    'block w-full rounded-lg border bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-orange transition-colors';
-  const inputNormal = `${inputBase} border-white/15 hover:border-white/25 focus:border-orange`;
-  const inputError = `${inputBase} border-red-400/60 focus:ring-red-400`;
-  const labelBase = 'block text-sm font-medium text-white/80 mb-1.5';
-  const errorBase = 'mt-1.5 text-xs text-red-400';
+    'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-copper-500 transition-colors';
+  const inputNormal = `${inputBase} bg-white border-gray-200 hover:border-gray-300 focus:border-copper-500`;
+  const inputError = `${inputBase} bg-white border-red-300 focus:ring-red-400`;
+  const labelBase = 'block text-sm font-medium text-charcoal/80 mb-1.5';
+  const errorBase = 'mt-1.5 text-xs text-red-500';
 
   return (
     <form
@@ -67,7 +66,7 @@ export default function ContactForm() {
       {/* Name */}
       <div>
         <label htmlFor="contact-name" className={labelBase}>
-          Full Name <span className="text-orange">*</span>
+          Full Name <span className="text-copper-600">*</span>
         </label>
         <input
           id="contact-name"
@@ -88,7 +87,7 @@ export default function ContactForm() {
       <div>
         <label htmlFor="contact-company" className={labelBase}>
           Company{' '}
-          <span className="text-white/40 font-normal">(optional)</span>
+          <span className="text-gray-400 font-normal">(optional)</span>
         </label>
         <input
           id="contact-company"
@@ -104,7 +103,7 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="contact-phone" className={labelBase}>
-            Phone <span className="text-orange">*</span>
+            Phone <span className="text-copper-600">*</span>
           </label>
           <input
             id="contact-phone"
@@ -123,7 +122,7 @@ export default function ContactForm() {
 
         <div>
           <label htmlFor="contact-email" className={labelBase}>
-            Email <span className="text-orange">*</span>
+            Email <span className="text-copper-600">*</span>
           </label>
           <input
             id="contact-email"
@@ -144,11 +143,11 @@ export default function ContactForm() {
       {/* Project Type */}
       <div>
         <label htmlFor="contact-project-type" className={labelBase}>
-          Project Type <span className="text-orange">*</span>
+          Project Type <span className="text-copper-600">*</span>
         </label>
         <select
           id="contact-project-type"
-          className={`${errors.projectType ? inputError : inputNormal} appearance-none bg-navy-800 cursor-pointer`}
+          className={`${errors.projectType ? inputError : inputNormal} appearance-none cursor-pointer`}
           {...register('projectType')}
           defaultValue=""
         >
@@ -157,7 +156,6 @@ export default function ContactForm() {
               key={pt.value}
               value={pt.value}
               disabled={pt.value === ''}
-              className="bg-navy-800 text-white"
             >
               {pt.label}
             </option>
@@ -173,7 +171,7 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label htmlFor="contact-message" className={labelBase}>
-          Message <span className="text-orange">*</span>
+          Message <span className="text-copper-600">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -191,7 +189,7 @@ export default function ContactForm() {
 
       {/* Success message */}
       {isSubmitSuccessful && (
-        <p className="text-sm text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg px-4 py-3">
+        <p className="text-sm text-copper-700 bg-copper-50 border border-copper-200 rounded-lg px-4 py-3">
           Your enquiry has been sent. We&apos;ll be in touch shortly!
         </p>
       )}
@@ -200,7 +198,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-orange text-white text-sm font-semibold hover:bg-orange-600 transition-colors shadow-orange-glow disabled:opacity-60 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <>

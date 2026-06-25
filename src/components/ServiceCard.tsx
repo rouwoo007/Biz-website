@@ -10,20 +10,20 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ slug, title, shortDescription, icon }: ServiceCardProps) {
   return (
-    <div className="group flex flex-col bg-white rounded-2xl shadow-card border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <div className="group flex flex-col bg-white rounded-2xl shadow-card border border-gray-100 p-6 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
       {/* Icon container */}
-      <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-orange/10 text-orange mb-5 group-hover:bg-orange group-hover:text-white transition-colors duration-300 flex-shrink-0">
+      <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-copper-50 text-copper-600 mb-5 group-hover:bg-copper-500 group-hover:text-white transition-colors duration-300 flex-shrink-0">
         <span className="w-7 h-7 flex items-center justify-center">{icon}</span>
       </div>
 
       {/* Content */}
-      <h3 className="text-lg font-semibold text-navy mb-2 leading-snug">{title}</h3>
+      <h3 className="text-lg font-semibold text-charcoal mb-2 leading-snug">{title}</h3>
       <p className="text-sm text-gray-500 leading-relaxed flex-1">{shortDescription}</p>
 
       {/* Learn More link */}
       <Link
         href={`/services/${slug}`}
-        className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-orange hover:text-orange-600 transition-colors group/link"
+        className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-copper-600 hover:text-copper-700 transition-colors group/link"
         aria-label={`Learn more about ${title}`}
       >
         Learn More

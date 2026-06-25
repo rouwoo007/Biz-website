@@ -26,7 +26,6 @@ export default function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -37,7 +36,6 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu on route change / resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -50,7 +48,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-navy shadow-md">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <nav className="container mx-auto flex items-center justify-between h-16 lg:h-18">
         {/* Logo */}
         <Link
@@ -58,7 +56,7 @@ export default function Navbar() {
           className="flex items-center gap-2 flex-shrink-0"
           onClick={() => setMobileOpen(false)}
         >
-          <span className="text-xl font-extrabold text-white tracking-widest uppercase">
+          <span className="text-xl font-extrabold text-charcoal tracking-widest uppercase">
             Fix It Up
           </span>
         </Link>
@@ -67,13 +65,13 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-1">
           <Link
             href="/"
-            className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+            className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+            className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
           >
             About
           </Link>
@@ -82,7 +80,7 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setServicesOpen((prev) => !prev)}
-              className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+              className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
               aria-expanded={servicesOpen}
               aria-haspopup="true"
             >
@@ -99,12 +97,12 @@ export default function Navbar() {
             </button>
 
             {servicesOpen && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-navy-800 border border-white/10 rounded-lg shadow-xl py-1 z-50">
+              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-1 z-50">
                 {serviceItems.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/services/${item.slug}`}
-                    className="block px-4 py-2.5 text-sm text-white/80 hover:text-white hover:bg-navy-700 transition-colors"
+                    className="block px-4 py-2.5 text-sm text-charcoal/70 hover:text-charcoal hover:bg-gray-50 transition-colors"
                     onClick={() => setServicesOpen(false)}
                   >
                     {item.label}
@@ -116,13 +114,13 @@ export default function Navbar() {
 
           <Link
             href="/projects"
-            className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+            className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
           >
             Projects
           </Link>
           <Link
             href="/contact"
-            className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+            className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
           >
             Contact
           </Link>
@@ -132,7 +130,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/get-a-quote"
-            className="hidden lg:inline-flex items-center px-5 py-2 text-sm font-semibold text-white bg-orange rounded-lg hover:bg-orange-600 transition-colors shadow-orange-glow"
+            className="hidden lg:inline-flex items-center px-5 py-2 text-sm font-semibold text-white bg-copper-500 rounded-lg hover:bg-copper-600 transition-colors shadow-copper-glow"
           >
             Get a Free Quote
           </Link>
@@ -140,22 +138,22 @@ export default function Navbar() {
           {/* Hamburger button */}
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded focus:outline-none focus:ring-2 focus:ring-orange"
+            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded focus:outline-none focus:ring-2 focus:ring-copper-500"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
           >
             <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+              className={`block w-6 h-0.5 bg-charcoal transition-all duration-300 ${
                 mobileOpen ? 'rotate-45 translate-y-2' : ''
               }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+              className={`block w-6 h-0.5 bg-charcoal transition-all duration-300 ${
                 mobileOpen ? 'opacity-0' : ''
               }`}
             />
             <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+              className={`block w-6 h-0.5 bg-charcoal transition-all duration-300 ${
                 mobileOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             />
@@ -165,13 +163,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-navy-800 border-t border-white/10">
+        <div className="lg:hidden bg-white border-t border-gray-100">
           <div className="container mx-auto py-4 flex flex-col gap-1">
             {navLinks.slice(0, 2).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+                className="block px-4 py-3 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -182,7 +180,7 @@ export default function Navbar() {
             <div>
               <button
                 onClick={() => setMobileServicesOpen((prev) => !prev)}
-                className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+                className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
                 aria-expanded={mobileServicesOpen}
               >
                 Services
@@ -202,7 +200,7 @@ export default function Navbar() {
                     <Link
                       key={item.slug}
                       href={`/services/${item.slug}`}
-                      className="block px-4 py-2.5 text-sm text-white/70 hover:text-white hover:bg-navy-700 rounded transition-colors"
+                      className="block px-4 py-2.5 text-sm text-charcoal/60 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
                       onClick={() => setMobileOpen(false)}
                     >
                       {item.label}
@@ -216,7 +214,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-navy-700 rounded transition-colors"
+                className="block px-4 py-3 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
@@ -226,7 +224,7 @@ export default function Navbar() {
             <div className="pt-3 pb-1 px-4">
               <Link
                 href="/get-a-quote"
-                className="block text-center w-full px-5 py-3 text-sm font-semibold text-white bg-orange rounded-lg hover:bg-orange-600 transition-colors"
+                className="block text-center w-full px-5 py-3 text-sm font-semibold text-white bg-copper-500 rounded-lg hover:bg-copper-600 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Get a Free Quote

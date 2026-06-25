@@ -13,7 +13,7 @@ export default function ProjectCard({ name, slug, typeLabel, photo }: ProjectCar
   return (
     <Link
       href={`/projects/${slug}`}
-      className="group block relative overflow-hidden rounded-2xl shadow-card bg-navy aspect-[4/3] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+      className="group block relative overflow-hidden rounded-2xl shadow-card bg-gray-100 aspect-[4/3] hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300"
       aria-label={`View project: ${name}`}
     >
       {/* Project image */}
@@ -27,24 +27,24 @@ export default function ProjectCard({ name, slug, typeLabel, photo }: ProjectCar
       />
 
       {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
       {/* Type badge */}
       <div className="absolute top-3 left-3">
-        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange text-white shadow">
+        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-copper-500 text-white shadow">
           {typeLabel}
         </span>
       </div>
 
       {/* Project name at bottom */}
       <div className="absolute bottom-0 left-0 right-0 p-4">
-        <h3 className="text-base font-semibold text-white leading-snug group-hover:text-orange-400 transition-colors duration-200">
+        <h3 className="text-base font-semibold text-white leading-snug group-hover:text-copper-300 transition-colors duration-200">
           {name}
         </h3>
         <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
           <span className="text-xs text-white/70">View project</span>
           <svg
-            className="w-3.5 h-3.5 text-orange"
+            className="w-3.5 h-3.5 text-copper-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

@@ -3,11 +3,22 @@ import ServiceCard from '@/components/ServiceCard';
 import ProjectCard from '@/components/ProjectCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import CTASection from '@/components/CTASection';
+import HeroSlideshow from '@/components/HeroSlideshow';
 import { services } from '@/data/services';
 import { projects } from '@/data/projects';
 import { testimonials } from '@/data/testimonials';
 
-// ─── Service icon map ──────────────────────────────────────────────────────────
+const heroImages = [
+  '/images/hero-fitout.jpg',
+  '/images/Curva_107 Coffee_1.jpg',
+  '/images/DSC00398.jpg',
+  '/images/Curva_107 Coffee_5.jpg',
+  '/images/DSC00649.jpg',
+  '/images/Curva_107 Coffee_8.jpg',
+  '/images/DSC00719.jpg',
+];
+
+// --- Service icon map --------------------------------------------------------
 const serviceIcons: Record<string, React.ReactNode> = {
   retail: (
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} className="w-7 h-7">
@@ -41,11 +52,11 @@ const serviceIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-// ─── Trust bar items ───────────────────────────────────────────────────────────
+// --- Trust bar items ---------------------------------------------------------
 const trustItems = [
   {
     icon: (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-orange flex-shrink-0">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-copper-500 flex-shrink-0">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
@@ -54,7 +65,7 @@ const trustItems = [
   },
   {
     icon: (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-orange flex-shrink-0">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-copper-500 flex-shrink-0">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
       </svg>
     ),
@@ -63,7 +74,7 @@ const trustItems = [
   },
   {
     icon: (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-orange flex-shrink-0">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-copper-500 flex-shrink-0">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -72,7 +83,7 @@ const trustItems = [
   },
   {
     icon: (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-orange flex-shrink-0">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-6 h-6 text-copper-500 flex-shrink-0">
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
       </svg>
     ),
@@ -88,49 +99,37 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Hero Section ──────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex items-center bg-navy overflow-hidden">
-        {/* Background gradient layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-800 to-navy-700" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(249,115,22,0.12),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(22,48,96,0.8),transparent_70%)]" />
+      {/* -- Hero Section ---------------------------------------------------- */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* Background slideshow */}
+        <HeroSlideshow images={heroImages} interval={5000} />
 
-        {/* Decorative grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-
-        {/* Decorative orange accent bar */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange to-transparent opacity-60" />
+        {/* Overlay for text readability — light on the left, clear on the right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/50 to-transparent" />
 
         <div className="container mx-auto relative z-10 py-24 sm:py-32">
           <div className="max-w-4xl">
             {/* Location badge */}
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-8">
-              <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
-              <span className="text-white/70 text-sm font-medium tracking-wide">
+            <div className="inline-flex items-center gap-2 bg-copper-50 border border-copper-200 rounded-full px-4 py-2 mb-8">
+              <span className="w-2 h-2 rounded-full bg-copper-500 animate-pulse" />
+              <span className="text-charcoal/60 text-sm font-medium tracking-wide">
                 Brisbane &amp; South East Queensland
               </span>
             </div>
 
             {/* Main heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight mb-6">
               Commercial{' '}
-              <span className="text-orange">Shopfitting</span>
+              <span className="text-copper-600">Shopfitting</span>
               {' '}&amp; Joinery{' '}
               <span className="relative inline-block">
                 Experts
-                <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange/40 rounded-full" />
+                <span className="absolute -bottom-1 left-0 right-0 h-1 bg-copper-500/40 rounded-full" />
               </span>
             </h1>
 
             {/* Tagline */}
-            <p className="text-white/70 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
+            <p className="text-charcoal/80 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
               We deliver premium commercial fitouts for retail, hospitality, medical and office
               spaces — built on over 15 years of craftsmanship, precision joinery and end-to-end
               project management across South East Queensland.
@@ -140,7 +139,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link
                 href="/get-a-quote"
-                className="group inline-flex items-center gap-2.5 bg-orange hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 shadow-orange-glow hover:shadow-lg hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 bg-copper-500 hover:bg-copper-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 shadow-copper-glow hover:shadow-lg hover:-translate-y-0.5"
               >
                 Get a Free Quote
                 <svg
@@ -156,7 +155,7 @@ export default function HomePage() {
 
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-2.5 border-2 border-white/25 hover:border-white/50 text-white font-semibold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:bg-white/5"
+                className="group inline-flex items-center gap-2.5 border-2 border-charcoal/20 hover:border-charcoal/40 text-charcoal font-semibold px-8 py-4 rounded-xl text-base transition-all duration-200 hover:bg-charcoal/5"
               >
                 View Our Work
                 <svg
@@ -171,11 +170,11 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Quick trust signals below CTAs */}
+            {/* Quick trust signals */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-10">
               {['QBCC Licensed', 'ABN Registered', '15+ Years Experience', '500+ Projects'].map((item) => (
-                <div key={item} className="flex items-center gap-1.5 text-white/50 text-sm">
-                  <svg className="w-3.5 h-3.5 text-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <div key={item} className="flex items-center gap-1.5 text-charcoal/40 text-sm">
+                  <svg className="w-3.5 h-3.5 text-copper-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   {item}
@@ -186,19 +185,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust Bar ─────────────────────────────────────────────────────────── */}
-      <section className="bg-navy-800 border-y border-white/5 py-10">
+      {/* -- Trust Bar ------------------------------------------------------- */}
+      <section className="bg-white border-y border-gray-100 py-10">
         <div className="container mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {trustItems.map((item) => (
               <div
                 key={item.label}
-                className="flex items-start sm:items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/5"
+                className="flex items-start sm:items-center gap-3 p-4 rounded-xl bg-cream border border-gray-100"
               >
                 <div className="mt-0.5 sm:mt-0">{item.icon}</div>
                 <div>
-                  <p className="text-white font-bold text-sm sm:text-base leading-snug">{item.label}</p>
-                  <p className="text-white/45 text-xs sm:text-sm mt-0.5">{item.value}</p>
+                  <p className="text-charcoal font-bold text-sm sm:text-base leading-snug">{item.label}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm mt-0.5">{item.value}</p>
                 </div>
               </div>
             ))}
@@ -206,24 +205,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Services Grid ─────────────────────────────────────────────────────── */}
-      <section className="bg-navy py-20 sm:py-28">
+      {/* -- Services Grid --------------------------------------------------- */}
+      <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto">
-          {/* Section header */}
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-orange/10 border border-orange/20 rounded-full px-4 py-1.5 mb-5">
-              <span className="text-orange text-xs font-semibold uppercase tracking-widest">What We Do</span>
+            <div className="inline-flex items-center gap-2 bg-copper-50 border border-copper-200 rounded-full px-4 py-1.5 mb-5">
+              <span className="text-copper-600 text-xs font-semibold uppercase tracking-widest">What We Do</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
               Our Services
             </h2>
-            <p className="text-white/55 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-gray-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               From concept to completion, we provide specialist shopfitting and joinery services
               tailored to your business needs.
             </p>
           </div>
 
-          {/* Services grid */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {featuredServices.map((service) => (
               <ServiceCard
@@ -236,11 +233,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* View all services link */}
           <div className="text-center mt-12">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-orange font-semibold text-sm hover:text-orange-400 transition-colors"
+              className="inline-flex items-center gap-2 text-copper-600 font-semibold text-sm hover:text-copper-700 transition-colors"
             >
               View All Services
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -251,26 +247,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Featured Projects ──────────────────────────────────────────────────── */}
-      <section className="bg-navy-800 py-20 sm:py-28">
+      {/* -- Featured Projects ----------------------------------------------- */}
+      <section className="bg-white py-20 sm:py-28">
         <div className="container mx-auto">
-          {/* Section header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
             <div>
-              <div className="inline-flex items-center gap-2 bg-orange/10 border border-orange/20 rounded-full px-4 py-1.5 mb-5">
-                <span className="text-orange text-xs font-semibold uppercase tracking-widest">Our Work</span>
+              <div className="inline-flex items-center gap-2 bg-copper-50 border border-copper-200 rounded-full px-4 py-1.5 mb-5">
+                <span className="text-copper-600 text-xs font-semibold uppercase tracking-widest">Our Work</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal">
                 Featured Projects
               </h2>
-              <p className="text-white/55 text-base sm:text-lg mt-3 max-w-xl leading-relaxed">
+              <p className="text-gray-500 text-base sm:text-lg mt-3 max-w-xl leading-relaxed">
                 A selection of our recent commercial fitout and joinery projects across
                 Brisbane and South East Queensland.
               </p>
             </div>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-orange font-semibold text-sm hover:text-orange-400 transition-colors flex-shrink-0"
+              className="inline-flex items-center gap-2 text-copper-600 font-semibold text-sm hover:text-copper-700 transition-colors flex-shrink-0"
             >
               View All Projects
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -279,7 +274,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Projects grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {featuredProjects.map((project) => (
               <ProjectCard
@@ -295,23 +289,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ──────────────────────────────────────────────────────── */}
-      <section className="bg-navy py-20 sm:py-28">
+      {/* -- Testimonials ---------------------------------------------------- */}
+      <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto">
-          {/* Section header */}
           <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-orange/10 border border-orange/20 rounded-full px-4 py-1.5 mb-5">
-              <span className="text-orange text-xs font-semibold uppercase tracking-widest">Client Stories</span>
+            <div className="inline-flex items-center gap-2 bg-copper-50 border border-copper-200 rounded-full px-4 py-1.5 mb-5">
+              <span className="text-copper-600 text-xs font-semibold uppercase tracking-widest">Client Stories</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
               What Our Clients Say
             </h2>
-            <p className="text-white/55 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
               We measure our success by the satisfaction of the businesses we work with.
             </p>
           </div>
 
-          {/* Testimonials grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {featuredTestimonials.map((testimonial) => (
               <TestimonialCard
@@ -327,7 +319,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA Section ───────────────────────────────────────────────────────── */}
+      {/* -- CTA Section ----------------------------------------------------- */}
       <CTASection
         heading="Ready to Transform Your Space?"
         subtext="Get a free, no-obligation quote from our expert team. We'll visit your site, discuss your vision and deliver a detailed proposal — at no cost to you."

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { z } from 'zod';
 
-// ─── Schemas ────────────────────────────────────────────────────────────────
+// --- Schemas -----------------------------------------------------------------
 
 const step1Schema = z.object({
   name: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -33,7 +33,7 @@ type Step1Data = z.infer<typeof step1Schema>;
 type Step2Data = z.infer<typeof step2Schema>;
 type Step3Data = z.infer<typeof step3Schema>;
 
-// ─── Options ────────────────────────────────────────────────────────────────
+// --- Options -----------------------------------------------------------------
 
 const PROJECT_TYPES = [
   { value: '', label: 'Select a project type…' },
@@ -79,16 +79,16 @@ const HEARD_ABOUT_US = [
   { value: 'other', label: 'Other' },
 ];
 
-// ─── Shared style helpers ────────────────────────────────────────────────────
+// --- Shared style helpers ----------------------------------------------------
 
 const inputBase =
-  'block w-full rounded-lg border bg-navy-700 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-orange transition-colors';
-const inputNormal = `${inputBase} border-white/15 hover:border-white/30 focus:border-orange`;
-const inputError = `${inputBase} border-red-400/60 focus:ring-red-400`;
-const labelBase = 'block text-sm font-medium text-white/80 mb-1.5';
-const errorBase = 'mt-1.5 text-xs text-red-400';
+  'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-copper-500 transition-colors';
+const inputNormal = `${inputBase} bg-white border-gray-200 hover:border-gray-300 focus:border-copper-500`;
+const inputError = `${inputBase} bg-white border-red-300 focus:ring-red-400`;
+const labelBase = 'block text-sm font-medium text-charcoal/80 mb-1.5';
+const errorBase = 'mt-1.5 text-xs text-red-500';
 
-// ─── Step indicator ──────────────────────────────────────────────────────────
+// --- Step indicator ----------------------------------------------------------
 
 const STEPS = [
   { number: 1, label: 'Your Details' },
@@ -104,16 +104,15 @@ function StepIndicator({ current }: { current: number }) {
         const isComplete = step.number < current;
         return (
           <div key={step.number} className="flex items-center">
-            {/* Circle */}
             <div className="flex flex-col items-center">
               <div
                 className={[
                   'w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors',
                   isComplete
-                    ? 'bg-orange text-white'
+                    ? 'bg-copper-500 text-white'
                     : isActive
-                    ? 'bg-orange text-white ring-4 ring-orange/25'
-                    : 'bg-navy-700 border border-white/20 text-white/40',
+                    ? 'bg-copper-500 text-white ring-4 ring-copper-100'
+                    : 'bg-gray-100 border border-gray-200 text-gray-400',
                 ].join(' ')}
               >
                 {isComplete ? (
@@ -133,19 +132,18 @@ function StepIndicator({ current }: { current: number }) {
               <span
                 className={[
                   'mt-2 text-xs font-medium whitespace-nowrap',
-                  isActive ? 'text-orange' : isComplete ? 'text-white/60' : 'text-white/30',
+                  isActive ? 'text-copper-600' : isComplete ? 'text-gray-500' : 'text-gray-300',
                 ].join(' ')}
               >
                 {step.label}
               </span>
             </div>
 
-            {/* Connector line (not after last step) */}
             {idx < STEPS.length - 1 && (
               <div
                 className={[
                   'h-px w-12 sm:w-20 mx-1 mb-5 transition-colors',
-                  isComplete ? 'bg-orange' : 'bg-white/15',
+                  isComplete ? 'bg-copper-500' : 'bg-gray-200',
                 ].join(' ')}
               />
             )}
@@ -156,7 +154,7 @@ function StepIndicator({ current }: { current: number }) {
   );
 }
 
-// ─── Step 1: Your Details ────────────────────────────────────────────────────
+// --- Step 1 ------------------------------------------------------------------
 
 function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
   const {
@@ -167,10 +165,9 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate className="space-y-5">
-      {/* Name */}
       <div>
         <label htmlFor="q-name" className={labelBase}>
-          Full Name <span className="text-orange">*</span>
+          Full Name <span className="text-copper-600">*</span>
         </label>
         <input
           id="q-name"
@@ -183,11 +180,10 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
         {errors.name && <p className={errorBase} role="alert">{errors.name.message}</p>}
       </div>
 
-      {/* Company */}
       <div>
         <label htmlFor="q-company" className={labelBase}>
           Company{' '}
-          <span className="text-white/40 font-normal">(optional)</span>
+          <span className="text-gray-400 font-normal">(optional)</span>
         </label>
         <input
           id="q-company"
@@ -199,11 +195,10 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
         />
       </div>
 
-      {/* Phone + Email */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="q-phone" className={labelBase}>
-            Phone <span className="text-orange">*</span>
+            Phone <span className="text-copper-600">*</span>
           </label>
           <input
             id="q-phone"
@@ -218,7 +213,7 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
 
         <div>
           <label htmlFor="q-email" className={labelBase}>
-            Email <span className="text-orange">*</span>
+            Email <span className="text-copper-600">*</span>
           </label>
           <input
             id="q-email"
@@ -237,7 +232,7 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
   );
 }
 
-// ─── Step 2: Project Details ─────────────────────────────────────────────────
+// --- Step 2 ------------------------------------------------------------------
 
 function Step2({
   onNext,
@@ -254,10 +249,9 @@ function Step2({
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate className="space-y-5">
-      {/* Project Type */}
       <div>
         <label htmlFor="q-project-type" className={labelBase}>
-          Project Type <span className="text-orange">*</span>
+          Project Type <span className="text-copper-600">*</span>
         </label>
         <select
           id="q-project-type"
@@ -266,25 +260,17 @@ function Step2({
           {...register('projectType')}
         >
           {PROJECT_TYPES.map((opt) => (
-            <option
-              key={opt.value}
-              value={opt.value}
-              disabled={opt.value === ''}
-              className="bg-navy-800 text-white"
-            >
+            <option key={opt.value} value={opt.value} disabled={opt.value === ''}>
               {opt.label}
             </option>
           ))}
         </select>
-        {errors.projectType && (
-          <p className={errorBase} role="alert">{errors.projectType.message}</p>
-        )}
+        {errors.projectType && <p className={errorBase} role="alert">{errors.projectType.message}</p>}
       </div>
 
-      {/* Location */}
       <div>
         <label htmlFor="q-location" className={labelBase}>
-          Location / Suburb <span className="text-orange">*</span>
+          Location / Suburb <span className="text-copper-600">*</span>
         </label>
         <input
           id="q-location"
@@ -293,16 +279,13 @@ function Step2({
           className={errors.location ? inputError : inputNormal}
           {...register('location')}
         />
-        {errors.location && (
-          <p className={errorBase} role="alert">{errors.location.message}</p>
-        )}
+        {errors.location && <p className={errorBase} role="alert">{errors.location.message}</p>}
       </div>
 
-      {/* Budget + Timeline */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="q-budget" className={labelBase}>
-            Budget Range <span className="text-orange">*</span>
+            Budget Range <span className="text-copper-600">*</span>
           </label>
           <select
             id="q-budget"
@@ -311,24 +294,17 @@ function Step2({
             {...register('budgetRange')}
           >
             {BUDGET_RANGES.map((opt) => (
-              <option
-                key={opt.value}
-                value={opt.value}
-                disabled={opt.value === ''}
-                className="bg-navy-800 text-white"
-              >
+              <option key={opt.value} value={opt.value} disabled={opt.value === ''}>
                 {opt.label}
               </option>
             ))}
           </select>
-          {errors.budgetRange && (
-            <p className={errorBase} role="alert">{errors.budgetRange.message}</p>
-          )}
+          {errors.budgetRange && <p className={errorBase} role="alert">{errors.budgetRange.message}</p>}
         </div>
 
         <div>
           <label htmlFor="q-timeline" className={labelBase}>
-            Timeline <span className="text-orange">*</span>
+            Timeline <span className="text-copper-600">*</span>
           </label>
           <select
             id="q-timeline"
@@ -337,19 +313,12 @@ function Step2({
             {...register('timeline')}
           >
             {TIMELINES.map((opt) => (
-              <option
-                key={opt.value}
-                value={opt.value}
-                disabled={opt.value === ''}
-                className="bg-navy-800 text-white"
-              >
+              <option key={opt.value} value={opt.value} disabled={opt.value === ''}>
                 {opt.label}
               </option>
             ))}
           </select>
-          {errors.timeline && (
-            <p className={errorBase} role="alert">{errors.timeline.message}</p>
-          )}
+          {errors.timeline && <p className={errorBase} role="alert">{errors.timeline.message}</p>}
         </div>
       </div>
 
@@ -358,7 +327,7 @@ function Step2({
   );
 }
 
-// ─── Step 3: Additional Info ─────────────────────────────────────────────────
+// --- Step 3 ------------------------------------------------------------------
 
 function Step3({
   onSubmit,
@@ -377,10 +346,9 @@ function Step3({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-      {/* Project Description */}
       <div>
         <label htmlFor="q-description" className={labelBase}>
-          Project Description <span className="text-orange">*</span>
+          Project Description <span className="text-copper-600">*</span>
         </label>
         <textarea
           id="q-description"
@@ -389,21 +357,18 @@ function Step3({
           className={`${errors.description ? inputError : inputNormal} resize-y`}
           {...register('description')}
         />
-        {errors.description && (
-          <p className={errorBase} role="alert">{errors.description.message}</p>
-        )}
+        {errors.description && <p className={errorBase} role="alert">{errors.description.message}</p>}
       </div>
 
-      {/* File upload placeholder */}
       <div>
         <p className={labelBase}>
           Attachments{' '}
-          <span className="text-white/40 font-normal">(optional)</span>
+          <span className="text-gray-400 font-normal">(optional)</span>
         </p>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-white/15 bg-navy-700 px-6 py-8 text-center cursor-pointer hover:border-orange/40 transition-colors group">
-          <div className="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center group-hover:bg-orange/20 transition-colors">
+        <div className="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-gray-200 bg-cream px-6 py-8 text-center cursor-pointer hover:border-copper-300 transition-colors group">
+          <div className="w-10 h-10 rounded-full bg-copper-50 flex items-center justify-center group-hover:bg-copper-100 transition-colors">
             <svg
-              className="w-5 h-5 text-orange"
+              className="w-5 h-5 text-copper-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -417,21 +382,20 @@ function Step3({
             </svg>
           </div>
           <div>
-            <p className="text-sm font-medium text-white/70">
+            <p className="text-sm font-medium text-charcoal/70">
               Drag &amp; drop files here, or{' '}
-              <span className="text-orange">browse</span>
+              <span className="text-copper-600">browse</span>
             </p>
-            <p className="text-xs text-white/40 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Plans, drawings, photos — PDF, PNG, JPG up to 20 MB
             </p>
           </div>
         </div>
       </div>
 
-      {/* How did you hear about us */}
       <div>
         <label htmlFor="q-heard" className={labelBase}>
-          How did you hear about us? <span className="text-orange">*</span>
+          How did you hear about us? <span className="text-copper-600">*</span>
         </label>
         <select
           id="q-heard"
@@ -440,19 +404,12 @@ function Step3({
           {...register('heardAboutUs')}
         >
           {HEARD_ABOUT_US.map((opt) => (
-            <option
-              key={opt.value}
-              value={opt.value}
-              disabled={opt.value === ''}
-              className="bg-navy-800 text-white"
-            >
+            <option key={opt.value} value={opt.value} disabled={opt.value === ''}>
               {opt.label}
             </option>
           ))}
         </select>
-        {errors.heardAboutUs && (
-          <p className={errorBase} role="alert">{errors.heardAboutUs.message}</p>
-        )}
+        {errors.heardAboutUs && <p className={errorBase} role="alert">{errors.heardAboutUs.message}</p>}
       </div>
 
       <StepNavigation step={3} onBack={onBack} isSubmitting={isSubmitting} />
@@ -460,7 +417,7 @@ function Step3({
   );
 }
 
-// ─── Shared navigation buttons ───────────────────────────────────────────────
+// --- Shared navigation buttons -----------------------------------------------
 
 function StepNavigation({
   step,
@@ -479,7 +436,7 @@ function StepNavigation({
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/20 text-sm font-medium text-white hover:bg-white/5 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-200 text-sm font-medium text-charcoal hover:bg-gray-50 transition-colors"
         >
           <svg
             className="w-4 h-4"
@@ -497,7 +454,7 @@ function StepNavigation({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-orange text-white text-sm font-semibold hover:bg-orange-600 transition-colors shadow-orange-glow disabled:opacity-60 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isLast ? (
           isSubmitting ? (
@@ -552,7 +509,7 @@ function StepNavigation({
   );
 }
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+// --- Page --------------------------------------------------------------------
 
 export default function GetAQuotePage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -574,13 +531,11 @@ export default function GetAQuotePage() {
 
   const handleStep3 = async (_data: Step3Data) => {
     setIsSubmitting(true);
-    // Simulate async submit
     await new Promise((resolve) => setTimeout(resolve, 800));
     setIsSubmitting(false);
     alert(
       `Thank you, ${step1Data?.name}! Your quote request has been received. Our team will be in touch within one business day.`
     );
-    // Reset form
     setCurrentStep(1);
     setStep1Data(null);
     setStep2Data(null);
@@ -588,38 +543,35 @@ export default function GetAQuotePage() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="bg-navy-800 border-b border-white/10">
+      {/* -- Hero ------------------------------------------------------------ */}
+      <section className="bg-cream border-b border-gray-100">
         <div className="container mx-auto py-14 sm:py-20">
           <div className="mb-5">
-            <span className="inline-block w-10 h-1 rounded-full bg-orange" />
+            <span className="inline-block w-10 h-1 rounded-full bg-copper-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-charcoal leading-tight">
             Get a Free Quote
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-white/60 max-w-xl leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-gray-500 max-w-xl leading-relaxed">
             Tell us about your project and we&apos;ll prepare a detailed, no-obligation
             quote tailored to your specific requirements.
           </p>
         </div>
       </section>
 
-      {/* ── Form section ─────────────────────────────────── */}
-      <section className="bg-navy">
+      {/* -- Form section ---------------------------------------------------- */}
+      <section className="bg-white">
         <div className="container mx-auto py-14 sm:py-20">
           <div className="max-w-2xl mx-auto">
 
-            {/* Step indicator */}
             <StepIndicator current={currentStep} />
 
-            {/* Form card */}
-            <div className="rounded-xl bg-navy-800 border border-white/10 p-6 sm:p-10">
-              {/* Step heading */}
+            <div className="rounded-xl bg-cream border border-gray-100 p-6 sm:p-10">
               <div className="mb-7">
-                <p className="text-xs font-semibold text-orange uppercase tracking-widest mb-1">
+                <p className="text-xs font-semibold text-copper-600 uppercase tracking-widest mb-1">
                   Step {currentStep} of {STEPS.length}
                 </p>
-                <h2 className="text-xl sm:text-2xl font-bold text-white">
+                <h2 className="text-xl sm:text-2xl font-bold text-charcoal">
                   {STEPS[currentStep - 1].label}
                 </h2>
               </div>
@@ -640,8 +592,7 @@ export default function GetAQuotePage() {
               )}
             </div>
 
-            {/* Trust note */}
-            <p className="mt-6 text-center text-xs text-white/35 leading-relaxed">
+            <p className="mt-6 text-center text-xs text-gray-400 leading-relaxed">
               Your information is kept private and will only be used to prepare
               your quote. No spam, ever.
             </p>

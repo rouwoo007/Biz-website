@@ -63,25 +63,25 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy py-20 sm:py-28">
+      <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto text-center">
           <div className="flex justify-center mb-5">
-            <span className="inline-block w-12 h-1 rounded-full bg-orange" />
+            <span className="inline-block w-12 h-1 rounded-full bg-copper-500" />
           </div>
-          <p className="text-orange font-semibold uppercase tracking-wider text-sm mb-3">
+          <p className="text-copper-600 font-semibold uppercase tracking-wider text-sm mb-3">
             What We Do
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-tight">
             Our Services
           </h1>
-          <p className="mt-5 text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
             QBCC-licensed commercial fitout and joinery specialists serving Brisbane and South East
             Queensland. Whatever your space, we have the expertise to deliver it.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/get-a-quote"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-orange text-white text-sm font-semibold hover:bg-orange-600 transition-colors shadow-orange-glow"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow"
             >
               Get a Free Quote
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -90,7 +90,7 @@ export default function ServicesPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-white/20 text-white text-sm font-semibold hover:bg-white/5 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-gray-300 text-charcoal text-sm font-semibold hover:bg-gray-50 transition-colors"
             >
               Contact Us
             </Link>
@@ -99,10 +99,10 @@ export default function ServicesPage() {
       </section>
 
       {/* Services grid */}
-      <section className="bg-gray-50 py-16 sm:py-24">
+      <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-navy">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-charcoal">
               Everything Under One Roof
             </h2>
             <p className="mt-3 text-base text-gray-500 max-w-xl mx-auto leading-relaxed">
@@ -126,7 +126,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Stats strip */}
-      <section className="bg-navy-800 py-14 sm:py-20">
+      <section className="bg-copper-700 py-14 sm:py-20">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
             {[
@@ -147,9 +147,9 @@ export default function ServicesPage() {
               },
             ].map(({ stat, label, detail }) => (
               <div key={label} className="flex flex-col items-center gap-2 px-4">
-                <span className="text-4xl font-extrabold text-orange">{stat}</span>
-                <span className="text-base font-semibold text-white">{label}</span>
-                <p className="text-sm text-white/50 leading-relaxed">{detail}</p>
+                <span className="text-4xl font-extrabold text-white">{stat}</span>
+                <span className="text-base font-semibold text-white/90">{label}</span>
+                <p className="text-sm text-white/60 leading-relaxed">{detail}</p>
               </div>
             ))}
           </div>

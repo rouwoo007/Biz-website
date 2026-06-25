@@ -40,12 +40,12 @@ export default function ProjectPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero / Header */}
-      <section className="bg-navy py-14 sm:py-18">
+      <section className="bg-cream py-14 sm:py-18">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back link */}
           <Link
             href="/projects"
-            className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors mb-6 group"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-charcoal transition-colors mb-6 group"
           >
             <svg
               className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5"
@@ -61,13 +61,13 @@ export default function ProjectPage({ params }: Props) {
 
           {/* Type badge */}
           <div className="mb-4">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-orange text-white">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-copper-500 text-white">
               {project.typeLabel}
             </span>
           </div>
 
           {/* Project name */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal leading-tight max-w-3xl">
             {project.name}
           </h1>
         </div>
@@ -79,7 +79,7 @@ export default function ProjectPage({ params }: Props) {
           <div className="max-w-4xl mx-auto space-y-10">
             {/* Project Photo */}
             <div>
-              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
+              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
                 Project Photography
               </h2>
               <div className="rounded-2xl overflow-hidden shadow-lg">
@@ -96,7 +96,7 @@ export default function ProjectPage({ params }: Props) {
 
             {/* Description */}
             <div>
-              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
+              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
                 Project Overview
               </h2>
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
@@ -106,7 +106,7 @@ export default function ProjectPage({ params }: Props) {
 
             {/* Floorplan */}
             <div>
-              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
+              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
                 Floorplan
               </h2>
               <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
@@ -125,7 +125,7 @@ export default function ProjectPage({ params }: Props) {
             <div className="pt-4">
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-orange transition-colors group"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-charcoal hover:text-copper-600 transition-colors group"
               >
                 <svg
                   className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5"

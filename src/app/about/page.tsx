@@ -44,35 +44,34 @@ const credentials = [
 export default function AboutPage() {
   return (
     <main>
-      {/* ── Hero ────────────────────────────────────────────────── */}
-      <section className="bg-navy py-20 sm:py-28">
+      {/* -- Hero ------------------------------------------------------------ */}
+      <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto text-center">
-          {/* Accent line */}
           <div className="flex justify-center mb-6">
-            <span className="inline-block w-12 h-1 rounded-full bg-orange" />
+            <span className="inline-block w-12 h-1 rounded-full bg-copper-500" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-tight">
             About Fix It Up
           </h1>
-          <p className="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-white/60 leading-relaxed">
+          <p className="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-gray-500 leading-relaxed">
             {company.tagline}
           </p>
         </div>
       </section>
 
-      {/* ── Company Story ────────────────────────────────────────── */}
+      {/* -- Company Story --------------------------------------------------- */}
       <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto max-w-3xl">
           <div className="flex items-center gap-3 mb-6">
-            <span className="inline-block w-8 h-1 rounded-full bg-orange" />
-            <span className="text-sm font-semibold text-orange uppercase tracking-wider">
+            <span className="inline-block w-8 h-1 rounded-full bg-copper-500" />
+            <span className="text-sm font-semibold text-copper-600 uppercase tracking-wider">
               Our Story
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-8">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-charcoal leading-tight mb-8">
             Built on Brisbane, Trusted Across Queensland
           </h2>
-          <div className="flex flex-col gap-6 text-navy/70 text-base sm:text-lg leading-relaxed">
+          <div className="flex flex-col gap-6 text-gray-600 text-base sm:text-lg leading-relaxed">
             <p>
               {company.name} was founded with a single purpose: to give
               commercial businesses in South East Queensland a shopfitting
@@ -103,17 +102,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Values ──────────────────────────────────────────────── */}
-      <section className="bg-navy py-16 sm:py-24">
+      {/* -- Values ---------------------------------------------------------- */}
+      <section className="bg-cream py-16 sm:py-24">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
-              <span className="inline-block w-10 h-1 rounded-full bg-orange" />
+              <span className="inline-block w-10 h-1 rounded-full bg-copper-500" />
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-charcoal leading-tight">
               What We Stand For
             </h2>
-            <p className="mt-3 max-w-xl mx-auto text-white/60 text-base leading-relaxed">
+            <p className="mt-3 max-w-xl mx-auto text-gray-500 text-base leading-relaxed">
               Four principles that guide every project we take on.
             </p>
           </div>
@@ -122,16 +121,15 @@ export default function AboutPage() {
             {values.map((value) => (
               <div
                 key={value.title}
-                className="flex flex-col gap-3 rounded-2xl bg-navy-800 border border-white/10 p-6 hover:border-orange/40 transition-colors"
+                className="flex flex-col gap-3 rounded-2xl bg-white border border-gray-100 p-6 hover:border-copper-300 hover:shadow-card transition-all duration-200"
               >
-                {/* Icon dot */}
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange/15 shrink-0">
-                  <span className="w-3 h-3 rounded-full bg-orange" />
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-copper-50 shrink-0">
+                  <span className="w-3 h-3 rounded-full bg-copper-500" />
                 </span>
-                <h3 className="text-base font-bold text-white leading-snug">
+                <h3 className="text-base font-bold text-charcoal leading-snug">
                   {value.title}
                 </h3>
-                <p className="text-sm text-white/60 leading-relaxed">
+                <p className="text-sm text-gray-500 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -140,17 +138,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Credentials ─────────────────────────────────────────── */}
+      {/* -- Credentials ----------------------------------------------------- */}
       <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="flex justify-center mb-4">
-              <span className="inline-block w-10 h-1 rounded-full bg-orange" />
+              <span className="inline-block w-10 h-1 rounded-full bg-copper-500" />
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-charcoal leading-tight">
               Licensed, Insured &amp; Accredited
             </h2>
-            <p className="mt-3 max-w-xl mx-auto text-navy/60 text-base leading-relaxed">
+            <p className="mt-3 max-w-xl mx-auto text-gray-500 text-base leading-relaxed">
               You can engage {company.name} with full confidence. We hold all
               relevant licences and insurances required for commercial fitout
               work in Queensland.
@@ -161,12 +159,11 @@ export default function AboutPage() {
             {credentials.map((cred) => (
               <div
                 key={cred.label}
-                className="flex items-center gap-4 rounded-2xl border border-navy/10 bg-white shadow-card px-6 py-5"
+                className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white shadow-card px-6 py-5"
               >
-                {/* Checkmark icon */}
-                <span className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-orange/10">
+                <span className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-copper-50">
                   <svg
-                    className="w-5 h-5 text-orange"
+                    className="w-5 h-5 text-copper-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -180,10 +177,10 @@ export default function AboutPage() {
                   </svg>
                 </span>
                 <div className="flex flex-col">
-                  <span className="text-xs font-semibold text-navy/40 uppercase tracking-wider">
+                  <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                     {cred.label}
                   </span>
-                  <span className="text-base font-bold text-navy mt-0.5">
+                  <span className="text-base font-bold text-charcoal mt-0.5">
                     {cred.value}
                   </span>
                 </div>
@@ -193,7 +190,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── CTA ─────────────────────────────────────────────────── */}
+      {/* -- CTA ------------------------------------------------------------- */}
       <CTASection />
     </main>
   );

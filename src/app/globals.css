@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Variables ───────────────────────────────────────────── */
+/* --- CSS Variables ------------------------------------------------- */
 :root {
-  --background: #0A1628;
-  --foreground: #ffffff;
-  --navy:        #0A1628;
-  --navy-800:    #0d1e38;
-  --navy-700:    #112548;
-  --orange:      #F97316;
-  --orange-600:  #ea6c0f;
-  --orange-400:  #fb923c;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --cream:      #F8F7F3;
+  --cream-dark: #EFECE7;
+  --copper:     #b5553a;
+  --copper-600: #97452f;
+  --copper-400: #cc6e4e;
+  --copper-50:  #fdf4f1;
 }
 
-/* ─── Base Reset & Globals ────────────────────────────────────── */
+/* --- Base Reset & Globals ------------------------------------------ */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -23,117 +23,123 @@
   }
 
   body {
-    background-color: var(--navy);
+    background-color: var(--background);
     color: var(--foreground);
     font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     line-height: 1.6;
   }
 
-  /* Headings */
   h1, h2, h3, h4, h5, h6 {
     font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     font-weight: 700;
     line-height: 1.2;
-    color: #ffffff;
+    color: #1a1a1a;
   }
 
   h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
   h2 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
   h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 
-  /* Links */
   a {
-    color: var(--orange);
+    color: var(--copper);
     text-decoration: none;
     transition: color 0.2s ease;
   }
   a:hover {
-    color: var(--orange-400);
+    color: var(--copper-600);
   }
 
-  /* Horizontal rule */
   hr {
-    border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
   }
 
-  /* Focus ring — accessible & on-brand */
   *:focus-visible {
-    outline: 2px solid var(--orange);
+    outline: 2px solid var(--copper);
     outline-offset: 3px;
     border-radius: 4px;
   }
 
-  /* Scrollbar (Webkit) */
   ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: var(--navy-800); }
+  ::-webkit-scrollbar-track { background: #f5f5f5; }
   ::-webkit-scrollbar-thumb {
-    background: var(--navy-700);
+    background: #d4d4d4;
     border-radius: 4px;
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--copper); }
 }
 
-/* ─── Component Layer ─────────────────────────────────────────── */
+/* --- Component Layer ----------------------------------------------- */
 @layer components {
 
-  /* Buttons */
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none;
   }
 
   .btn-primary {
-    @apply btn bg-orange-500 text-white hover:bg-orange-600 active:scale-95 shadow-orange-glow;
+    @apply btn text-white active:scale-95;
+    background-color: var(--copper);
+    box-shadow: 0 0 20px rgba(181, 85, 58, 0.2);
+  }
+  .btn-primary:hover {
+    background-color: var(--copper-600);
   }
 
   .btn-outline {
-    @apply btn border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white active:scale-95;
+    @apply btn active:scale-95;
+    border: 1px solid var(--copper);
+    color: var(--copper);
+  }
+  .btn-outline:hover {
+    background-color: var(--copper);
+    color: #fff;
   }
 
   .btn-ghost {
-    @apply btn text-white/70 hover:text-white hover:bg-white/5;
+    @apply btn text-charcoal/70 hover:text-charcoal hover:bg-black/5;
   }
 
-  /* Cards */
   .card {
-    @apply rounded-2xl bg-navy-800 border border-white/5 shadow-card p-6;
+    @apply rounded-2xl bg-white border border-gray-100 shadow-card p-6;
   }
 
   .card-hover {
-    @apply card transition-transform duration-200 hover:-translate-y-1 hover:border-orange-500/30 hover:shadow-orange-glow;
+    @apply card transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover;
+    &:hover { border-color: rgba(181, 85, 58, 0.3); }
   }
 
-  /* Section wrapper */
   .section {
     @apply py-20 md:py-28;
   }
 
-  /* Section headings */
   .section-label {
-    @apply text-orange-500 text-sm font-semibold uppercase tracking-widest mb-3;
+    @apply text-sm font-semibold uppercase tracking-widest mb-3;
+    color: var(--copper);
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-white leading-tight;
+    @apply text-3xl md:text-4xl font-bold text-charcoal leading-tight;
   }
 
   .section-subtitle {
-    @apply text-white/60 text-lg mt-4 max-w-2xl;
+    @apply text-charcoal-muted text-lg mt-4 max-w-2xl;
   }
 
-  /* Orange accent divider */
-  .divider-orange {
-    @apply block w-12 h-1 bg-orange-500 rounded-full mt-4 mb-6;
+  .divider-copper {
+    @apply block w-12 h-1 rounded-full mt-4 mb-6;
+    background-color: var(--copper);
   }
 
-  /* Form inputs */
   .form-label {
-    @apply block text-sm font-medium text-white/70 mb-1.5;
+    @apply block text-sm font-medium text-charcoal/70 mb-1.5;
   }
 
   .form-input {
-    @apply w-full rounded-lg bg-navy-700 border border-white/10 px-4 py-3 text-white placeholder-white/30
-           text-sm transition-colors duration-200
-           focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:outline-none;
+    @apply w-full rounded-lg bg-white border border-gray-200 px-4 py-3 text-charcoal placeholder-gray-400
+           text-sm transition-colors duration-200 focus:outline-none;
+  }
+  .form-input:focus {
+    border-color: var(--copper);
+    box-shadow: 0 0 0 1px var(--copper);
   }
 
   .form-textarea {
@@ -145,65 +151,62 @@
   }
 
   .form-error {
-    @apply text-red-400 text-xs mt-1;
+    @apply text-red-500 text-xs mt-1;
   }
 
-  /* Badge */
   .badge {
     @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
   }
 
-  .badge-orange {
-    @apply badge bg-orange-500/10 text-orange-400 border border-orange-500/20;
+  .badge-copper {
+    @apply badge border;
+    background-color: var(--copper-50);
+    color: var(--copper-600);
+    border-color: #fde68a;
   }
 
-  .badge-navy {
-    @apply badge bg-white/5 text-white/70 border border-white/10;
+  .badge-gray {
+    @apply badge bg-gray-100 text-gray-600 border border-gray-200;
   }
 
-  /* Navigation link */
   .nav-link {
-    @apply text-white/70 text-sm font-medium hover:text-white transition-colors duration-150;
+    @apply text-charcoal/70 text-sm font-medium hover:text-charcoal transition-colors duration-150;
   }
 
   .nav-link-active {
-    @apply text-orange-500 font-semibold;
+    @apply font-semibold;
+    color: var(--copper);
   }
 }
 
-/* ─── Utility Layer ───────────────────────────────────────────── */
+/* --- Utility Layer ------------------------------------------------- */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Gradient text — for hero headlines */
   .text-gradient {
-    @apply bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-charcoal to-charcoal-muted bg-clip-text text-transparent;
   }
 
-  .text-gradient-orange {
-    @apply bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent;
+  .text-gradient-copper {
+    background: linear-gradient(to right, var(--copper), var(--copper-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Subtle background patterns */
-  .bg-grid-navy {
+  .bg-grid {
     background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  .border-b-copper {
+    border-bottom: 2px solid var(--copper);
   }
 
-  /* Orange bottom border accent */
-  .border-b-orange {
-    border-bottom: 2px solid var(--orange);
-  }
-
-  /* Muted text shorthands */
-  .text-muted  { @apply text-white/50; }
-  .text-subtle { @apply text-white/70; }
+  .text-muted  { @apply text-gray-400; }
+  .text-subtle { @apply text-gray-500; }
 }

@@ -10,7 +10,6 @@ export interface Project {
 }
 
 const typeLabelMap: Record<string, string> = {
-  "food-beverage": "Food & Beverage",
   retail: "Retail",
   medical: "Medical",
   wellness: "Wellness",
@@ -20,7 +19,6 @@ const typeLabelMap: Record<string, string> = {
 
 export const filterCategories: { value: string; label: string }[] = [
   { value: "all", label: "All" },
-  { value: "food-beverage", label: "Food & Beverage" },
   { value: "retail", label: "Retail" },
   { value: "medical", label: "Medical" },
   { value: "wellness", label: "Wellness" },
@@ -72,8 +70,8 @@ export const projects: Project[] = [
     id: 70,
     name: "ISPA Kebab",
     slug: "ispa-kebab",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_49e87b1e229945c895d26845180f001f~mv2.jpg",
     photo:
@@ -85,8 +83,8 @@ export const projects: Project[] = [
     id: 63,
     name: "Kulture Kebab",
     slug: "kulture-kebab",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_d03ebc0d449f406b8fedd3700e299503~mv2.jpg",
     photo:
@@ -150,8 +148,8 @@ export const projects: Project[] = [
     id: 69,
     name: "Melt Brothers Chermside",
     slug: "melt-brothers-chermside",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_f638edb0be0449fc98413a85f9302271~mv2.jpg",
     photo:
@@ -163,8 +161,8 @@ export const projects: Project[] = [
     id: 24,
     name: "Hawkers Lane",
     slug: "hawkers-lane",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_93413117c929437e801f6d39cb39eb46~mv2.jpg",
     photo:
@@ -202,8 +200,8 @@ export const projects: Project[] = [
     id: 41,
     name: "Origin Kebabs",
     slug: "origin-kebabs",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_07a83a9453e943029b6c092e8eebe647~mv2.jpg",
     photo:
@@ -215,8 +213,8 @@ export const projects: Project[] = [
     id: 49,
     name: "Turquoise Kebab",
     slug: "turquoise-kebab",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_a44f2463eddd4a7d9769fe81b60fa18b~mv2.jpg",
     photo:
@@ -241,14 +239,53 @@ export const projects: Project[] = [
     id: 19,
     name: "Origin Kebab",
     slug: "origin-kebab",
-    type: "food-beverage",
-    typeLabel: typeLabelMap["food-beverage"],
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
     floorplan:
       "https://static.wixstatic.com/media/27e9c0_a98128008199463ba52f2f585f1e0c93~mv2.jpg",
     photo:
       "https://static.wixstatic.com/media/27e9c0_327f575e36da49abb0087b231c3cbf73~mv2.jpg",
     description:
       "Food and beverage fitout for Origin Kebab with full kitchen build, service counter, customer area, and branded interior elements.",
+  },
+  {
+    id: 80,
+    name: "Hey Tea",
+    slug: "hey-tea",
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
+    floorplan:
+      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
+    photo:
+      "/images/hero-fitout.jpg",
+    description:
+      "Full hospitality fitout for Hey Tea featuring custom counter joinery, tea preparation area, interior finishes, and a welcoming customer experience space.",
+  },
+  {
+    id: 81,
+    name: "Cafe 107",
+    slug: "cafe-107",
+    type: "cafe",
+    typeLabel: typeLabelMap["cafe"],
+    floorplan:
+      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
+    photo:
+      "/images/Curva_107 Coffee_1.jpg",
+    description:
+      "Complete cafe fitout for Cafe 107 including espresso bar joinery, commercial kitchen installation, customer seating area, and modern interior design.",
+  },
+  {
+    id: 82,
+    name: "RoRo",
+    slug: "roro",
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
+    floorplan:
+      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
+    photo:
+      "/images/DSC00398.jpg",
+    description:
+      "Hospitality fitout for RoRo featuring custom bar and counter joinery, commercial kitchen setup, branded interior finishes, and dining area.",
   },
 ];
 

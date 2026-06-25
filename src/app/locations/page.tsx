@@ -2,7 +2,6 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { locations } from '@/data/locations';
 
-/* ─── Metadata ───────────────────────────────────────────────────── */
 export const metadata: Metadata = {
   title: 'Service Locations | Commercial Shopfitting Across South East Queensland',
   description:
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-/* ─── Location pin icon ──────────────────────────────────────────── */
 function PinIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -39,41 +37,40 @@ function PinIcon({ className }: { className?: string }) {
   );
 }
 
-/* ─── Page ───────────────────────────────────────────────────────── */
 export default function LocationsPage() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative bg-navy overflow-hidden">
-        <div className="absolute inset-0 bg-grid-navy pointer-events-none" aria-hidden="true" />
+      {/* -- Hero ------------------------------------------------------------ */}
+      <section className="relative bg-cream overflow-hidden">
+        <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
         <div
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange to-transparent opacity-40"
+          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-copper-500 to-transparent opacity-40"
           aria-hidden="true"
         />
 
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange/10 border border-orange/30 text-xs font-semibold text-orange uppercase tracking-widest mb-6">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-copper-50 border border-copper-200 text-xs font-semibold text-copper-600 uppercase tracking-widest mb-6">
             <PinIcon className="w-3.5 h-3.5" />
             Service Areas
           </span>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight text-balance">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-tight text-balance">
             Commercial Shopfitting Across{' '}
-            <span className="text-gradient-orange">South East Queensland</span>
+            <span className="text-gradient-copper">South East Queensland</span>
           </h1>
 
-          <p className="mt-6 text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
             Fix It Up Pty Ltd is a QBCC licensed shopfitter and joinery manufacturer servicing
             major centres throughout South East Queensland and beyond.
           </p>
         </div>
       </section>
 
-      {/* ── Location cards ───────────────────────────────────────── */}
-      <section className="bg-navy-800 py-16 sm:py-24">
+      {/* -- Location cards -------------------------------------------------- */}
+      <section className="bg-white py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="inline-block w-12 h-1 rounded-full bg-orange mb-6" aria-hidden="true" />
+            <span className="inline-block w-12 h-1 rounded-full bg-copper-500 mb-6" aria-hidden="true" />
             <h2 className="section-title">Areas We Service</h2>
             <p className="section-subtitle mx-auto mt-4">
               Click a location to learn more about our shopfitting and fitout services
@@ -86,32 +83,32 @@ export default function LocationsPage() {
               <li key={location.slug}>
                 <Link
                   href={`/locations/${location.slug}`}
-                  className="group relative flex flex-col h-full rounded-2xl bg-navy border border-white/5 p-7 hover:border-orange/40 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group relative flex flex-col h-full rounded-2xl bg-cream border border-gray-100 p-7 hover:border-copper-300 hover:-translate-y-1 hover:shadow-card-hover transition-all duration-300 overflow-hidden"
                 >
-                  {/* Hover orange accent strip */}
+                  {/* Hover accent strip */}
                   <span
-                    className="absolute top-0 left-0 right-0 h-0.5 bg-orange scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-t-2xl"
+                    className="absolute top-0 left-0 right-0 h-0.5 bg-copper-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-t-2xl"
                     aria-hidden="true"
                   />
 
                   {/* Icon */}
-                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-orange/10 text-orange mb-5 group-hover:bg-orange group-hover:text-white transition-colors duration-300 flex-shrink-0">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-copper-50 text-copper-600 mb-5 group-hover:bg-copper-500 group-hover:text-white transition-colors duration-300 flex-shrink-0">
                     <PinIcon className="w-6 h-6" />
                   </div>
 
                   {/* Name */}
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange transition-colors duration-200">
+                  <h3 className="text-xl font-bold text-charcoal mb-3 group-hover:text-copper-600 transition-colors duration-200">
                     {location.name}
                   </h3>
 
-                  {/* Description snippet */}
-                  <p className="text-sm text-white/60 leading-relaxed line-clamp-3 flex-1">
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 flex-1">
                     {location.description}
                   </p>
 
-                  {/* Suburb count badge */}
+                  {/* Bottom */}
                   <div className="flex items-center justify-between mt-6">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/40">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400">
                       <svg
                         className="w-3.5 h-3.5"
                         fill="none"
@@ -129,7 +126,7 @@ export default function LocationsPage() {
                       {location.suburbs.length} suburbs covered
                     </span>
 
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-orange group-hover:gap-2 transition-all duration-200">
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-copper-600 group-hover:gap-2 transition-all duration-200">
                       View area
                       <svg
                         className="w-4 h-4"
@@ -150,20 +147,20 @@ export default function LocationsPage() {
         </div>
       </section>
 
-      {/* ── CTA strip ────────────────────────────────────────────── */}
-      <section className="bg-navy py-14 sm:py-16 border-t border-white/5">
+      {/* -- CTA strip ------------------------------------------------------- */}
+      <section className="bg-cream py-14 sm:py-16 border-t border-gray-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-charcoal mb-4">
             Not sure if we cover your area?
           </h2>
-          <p className="text-white/60 text-base sm:text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-gray-500 text-base sm:text-lg mb-8 max-w-xl mx-auto">
             We regularly travel beyond our listed regions for the right project.
             Get in touch and we will let you know.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/get-a-quote"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-orange text-white text-sm font-semibold hover:bg-orange-600 transition-colors shadow-orange-glow"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow"
             >
               Get a Free Quote
               <svg
@@ -179,7 +176,7 @@ export default function LocationsPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-white/20 text-white text-sm font-semibold hover:bg-white/5 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-gray-300 text-charcoal text-sm font-semibold hover:bg-gray-50 transition-colors"
             >
               Contact Us
             </Link>
