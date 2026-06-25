@@ -3,8 +3,9 @@ import CTASection from '@/components/CTASection';
 import { company } from '@/data/company';
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: `Learn about ${company.name} — Brisbane commercial shopfitting & joinery with ${company.yearsExperience} years experience across South East Queensland.`,
+  title: 'About | Brisbane Shopfitting & Joinery',
+  description:
+    'Meet Fix It Up Pty Ltd — Brisbane commercial shopfitters with 15+ years & 500+ fitouts across SEQ. QBCC licensed. Get a free quote.',
   alternates: {
     canonical: '/about',
   },

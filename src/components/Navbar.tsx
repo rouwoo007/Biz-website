@@ -17,6 +17,7 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Projects', href: '/projects' },
+  { label: 'Guides', href: '/guides' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -25,6 +26,7 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const servicesTriggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -35,6 +37,30 @@ export default function Navbar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!servicesOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setServicesOpen(false);
+        servicesTriggerRef.current?.focus();
+      }
+    }
+    function handleFocusOut(event: FocusEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.relatedTarget as Node)) {
+        setServicesOpen(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    const node = dropdownRef.current;
+    node?.addEventListener('focusout', handleFocusOut);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      node?.removeEventListener('focusout', handleFocusOut);
+    };
+  }, [servicesOpen]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,10 +105,11 @@ export default function Navbar() {
           {/* Services dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
+              ref={servicesTriggerRef}
               onClick={() => setServicesOpen((prev) => !prev)}
               className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
               aria-expanded={servicesOpen}
-              aria-haspopup="true"
+              aria-controls="services-dropdown"
             >
               Services
               <svg
@@ -97,7 +124,10 @@ export default function Navbar() {
             </button>
 
             {servicesOpen && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-1 z-50">
+              <div
+                id="services-dropdown"
+                className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-100 rounded-lg shadow-lg py-1 z-50"
+              >
                 {serviceItems.map((item) => (
                   <Link
                     key={item.slug}
@@ -119,6 +149,12 @@ export default function Navbar() {
             Projects
           </Link>
           <Link
+            href="/guides"
+            className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
+          >
+            Guides
+          </Link>
+          <Link
             href="/contact"
             className="px-4 py-2 text-sm font-medium text-charcoal/70 hover:text-charcoal hover:bg-gray-50 rounded transition-colors"
           >
@@ -130,7 +166,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/get-a-quote"
-            className="hidden lg:inline-flex items-center px-5 py-2 text-sm font-semibold text-white bg-copper-500 rounded-lg hover:bg-copper-600 transition-colors shadow-copper-glow"
+            className="hidden lg:inline-flex items-center min-h-[44px] px-5 py-2 text-sm font-semibold text-white bg-copper-600 rounded-lg hover:bg-copper-700 transition-colors shadow-copper-glow"
           >
             Get a Free Quote
           </Link>
@@ -138,7 +174,7 @@ export default function Navbar() {
           {/* Hamburger button */}
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded focus:outline-none focus:ring-2 focus:ring-copper-500"
+            className="lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 rounded focus:outline-none focus:ring-2 focus:ring-copper-600"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
           >
@@ -224,7 +260,7 @@ export default function Navbar() {
             <div className="pt-3 pb-1 px-4">
               <Link
                 href="/get-a-quote"
-                className="block text-center w-full px-5 py-3 text-sm font-semibold text-white bg-copper-500 rounded-lg hover:bg-copper-600 transition-colors"
+                className="block text-center w-full px-5 py-3 text-sm font-semibold text-white bg-copper-600 rounded-lg hover:bg-copper-700 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Get a Free Quote

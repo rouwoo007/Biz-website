@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
 import { company } from '@/data/company';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
+  title: 'Contact Our Brisbane Shopfitting Team',
   description:
-    'Contact Fix It Up for commercial shopfitting & fitout enquiries in Brisbane & SEQ. Call us or request a free quote online.',
+    'Contact Fix It Up for commercial shopfitting & fitout enquiries across Brisbane & SEQ. Request a free quote online — we reply within one business day.',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
-    title: 'Contact Us | Fix It Up Pty Ltd',
+    title: 'Contact Our Brisbane Shopfitting Team | Fix It Up Pty Ltd',
     description:
-      'Get in touch with Brisbane\'s trusted commercial shopfitting team. Free quotes available.',
+      "Get in touch with Brisbane's trusted commercial shopfitting team. Free quotes available.",
   },
 };
 
 export default function ContactPage() {
+  const hasPhone = !company.phone.includes('[');
+  const hasEmail = !company.email.includes('[');
+
   return (
     <>
       {/* -- Hero ------------------------------------------------------------ */}
@@ -91,34 +95,36 @@ export default function ContactPage() {
                   </li>
 
                   {/* Phone */}
-                  <li className="flex items-start gap-4">
-                    <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-copper-50 flex items-center justify-center">
-                      <svg
-                        className="w-4 h-4 text-copper-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                        />
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
-                        Phone
-                      </p>
-                      <a
-                        href={`tel:${company.phone.replace(/\s/g, '')}`}
-                        className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors"
-                      >
-                        {company.phone}
-                      </a>
-                    </div>
-                  </li>
+                  {hasPhone && (
+                    <li className="flex items-start gap-4">
+                      <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-lg bg-copper-50 flex items-center justify-center">
+                        <svg
+                          className="w-4 h-4 text-copper-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                          Phone
+                        </p>
+                        <a
+                          href={`tel:${company.phone.replace(/\s/g, '')}`}
+                          className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors"
+                        >
+                          {company.phone}
+                        </a>
+                      </div>
+                    </li>
+                  )}
 
                   {/* Email */}
                   <li className="flex items-start gap-4">
@@ -139,14 +145,23 @@ export default function ContactPage() {
                     </span>
                     <div>
                       <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
-                        Email
+                        {hasEmail ? 'Email' : 'Enquiries'}
                       </p>
-                      <a
-                        href={`mailto:${company.email}`}
-                        className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors break-all"
-                      >
-                        {company.email}
-                      </a>
+                      {hasEmail ? (
+                        <a
+                          href={`mailto:${company.email}`}
+                          className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors break-all"
+                        >
+                          {company.email}
+                        </a>
+                      ) : (
+                        <Link
+                          href="/get-a-quote"
+                          className="text-sm text-charcoal/80 hover:text-copper-600 transition-colors"
+                        >
+                          Send an enquiry via our quote form
+                        </Link>
+                      )}
                     </div>
                   </li>
                 </ul>

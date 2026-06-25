@@ -5,11 +5,16 @@ import ServiceCard from '@/components/ServiceCard';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Our Services',
+  title: 'Commercial Fitout & Shopfitting Brisbane',
   description:
-    'Expert commercial shopfitting, joinery, retail, cafe, medical and office fitouts across Brisbane & South East Queensland.',
+    'Commercial shopfitting, joinery, retail, cafe, medical & office fitouts across Brisbane & SEQ. QBCC licensed. Request a free quote.',
   alternates: {
     canonical: '/services',
+  },
+  openGraph: {
+    title: 'Commercial Fitout & Shopfitting Brisbane | Fix It Up Pty Ltd',
+    description:
+      'Commercial shopfitting, joinery, retail, cafe, medical & office fitouts across Brisbane & SEQ. QBCC licensed.',
   },
 };
 

@@ -15,6 +15,8 @@ export function generateStaticParams() {
   }));
 }
 
+const BASE_URL = 'https://fixitup.au';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(params.slug);
 
@@ -24,11 +26,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const ogImage = project.photo.startsWith('http')
+    ? project.photo
+    : `${BASE_URL}${project.photo}`;
+  const description = project.description.slice(0, 160);
+
   return {
     title: `${project.name} — ${project.typeLabel} Project`,
-    description: project.description.slice(0, 160),
+    description,
     alternates: {
       canonical: `/projects/${project.slug}`,
+    },
+    openGraph: {
+      type: 'article',
+      title: `${project.name} — ${project.typeLabel} Fitout`,
+      description,
+      url: `/projects/${project.slug}`,
+      images: [{ url: ogImage, alt: `${project.name} — ${project.typeLabel} fitout by Fix It Up Pty Ltd` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.name} — ${project.typeLabel} Fitout`,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -40,8 +60,47 @@ export default function ProjectPage({ params }: Props) {
     notFound();
   }
 
+  const photoUrl = project.photo.startsWith('http')
+    ? project.photo
+    : `${BASE_URL}${project.photo}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        name: `${project.name} — ${project.typeLabel} Fitout`,
+        description: project.description,
+        url: `${BASE_URL}/projects/${project.slug}`,
+        creator: { '@id': `${BASE_URL}/#business` },
+        image: {
+          '@type': 'ImageObject',
+          url: photoUrl,
+          caption: `${project.name} — completed ${project.typeLabel.toLowerCase()} fitout by Fix It Up Pty Ltd`,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Projects', item: `${BASE_URL}/projects` },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: project.name,
+            item: `${BASE_URL}/projects/${project.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero / Header */}
       <section className="bg-cream py-14 sm:py-18">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

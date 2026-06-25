@@ -31,7 +31,7 @@ export default function ProjectCard({ name, slug, typeLabel, photo }: ProjectCar
 
       {/* Type badge */}
       <div className="absolute top-3 left-3">
-        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-copper-500 text-white shadow">
+        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-copper-600 text-white shadow">
           {typeLabel}
         </span>
       </div>

@@ -23,7 +23,7 @@ export default function ServiceCard({ slug, title, shortDescription, icon }: Ser
       {/* Learn More link */}
       <Link
         href={`/services/${slug}`}
-        className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-copper-600 hover:text-copper-700 transition-colors group/link"
+        className="inline-flex items-center gap-1.5 mt-4 min-h-[44px] text-sm font-semibold text-copper-700 hover:text-copper-800 transition-colors group/link"
         aria-label={`Learn more about ${title}`}
       >
         Learn More

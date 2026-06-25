@@ -235,7 +235,7 @@ export const services: Service[] = [
     title: 'Cafe & Restaurant Fitout',
     metaTitle: 'Cafe & Restaurant Fitouts Brisbane | Hospitality Fitout',
     shortDescription:
-      'Atmospheric cafe and restaurant fitouts that balance great design, commercial kitchen compliance and guest experience.',
+      'Atmospheric cafe & restaurant fitouts across Brisbane & SEQ balancing design, commercial kitchen compliance & guest experience. Get a free quote.',
     description:
       'A successful hospitality fitout must look stunning and function flawlessly under pressure. Fix It Up Pty Ltd brings together custom joinery, commercial kitchen knowledge, acoustic design and brand-aligned finishes to create venues guests keep coming back to.',
     icon: 'coffee',
@@ -308,7 +308,7 @@ export const services: Service[] = [
     title: 'Retail Fitout',
     metaTitle: 'Retail Fitout Brisbane | Retail Shopfitters QLD',
     shortDescription:
-      'Retail fitouts engineered to maximise dwell time, drive sales and deliver a standout brand experience in every store.',
+      'Retail fitouts across Brisbane & SEQ engineered to maximise dwell time, drive sales & deliver a standout brand experience. Get a free quote.',
     description:
       'Retail success starts with great design and tight execution. Fix It Up Pty Ltd creates retail environments that guide customers through your space, showcase your product and reinforce your brand at every touchpoint — on time and within budget.',
     icon: 'shopping-bag',
@@ -381,7 +381,7 @@ export const services: Service[] = [
     title: 'Medical & Dental Fitout',
     metaTitle: 'Medical & Dental Fitout Brisbane | Clinic Fitouts',
     shortDescription:
-      'Compliant, functional and welcoming medical and dental fitouts for GPs, specialists, allied health and dental practices.',
+      'Compliant, welcoming medical & dental fitouts across Brisbane & SEQ for GPs, specialists, allied health & dental practices. Get a free quote.',
     description:
       'Medical and dental fitouts require precision, infection-control knowledge and an understanding of patient flow. Fix It Up Pty Ltd delivers spaces that satisfy clinical requirements, accreditation standards and patient comfort — all managed under a single contract.',
     icon: 'medical',
@@ -454,7 +454,7 @@ export const services: Service[] = [
     title: 'Office Fitout',
     metaTitle: 'Office Fitout Brisbane | Workplace Fitout Specialists',
     shortDescription:
-      'Productive, inspiring office fitouts designed around the way your team works — from open-plan to collaborative and hybrid.',
+      'Productive office fitouts across Brisbane & SEQ, designed around how your team works — open-plan, collaborative or hybrid. Get a free quote.',
     description:
       'The modern office is about more than desks. Fix It Up Pty Ltd creates workplaces that attract talent, support culture and flex with your business. We deliver on time, minimise disruption and back every project with a written workmanship warranty.',
     icon: 'office',

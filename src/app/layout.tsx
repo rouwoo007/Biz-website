@@ -33,14 +33,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_AU",
+    url: "https://fixitup.au",
     siteName: "Fix It Up Pty Ltd",
     title: "Fix It Up Pty Ltd | Commercial Shopfitting & Joinery Brisbane",
     description:
       "QBCC licensed commercial shopfitting, joinery & fitout specialists in Brisbane & South East Queensland.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fix It Up Pty Ltd | Commercial Shopfitting & Joinery Brisbane",
+    description:
+      "QBCC licensed commercial shopfitting, joinery & fitout specialists in Brisbane & SEQ.",
+  },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

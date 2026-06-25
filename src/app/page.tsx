@@ -99,13 +99,56 @@ const trustItems = [
   },
 ];
 
+// --- Common questions (sourced from src/data/services.ts) --------------------
+const homeFaqs = [
+  {
+    question: 'How long does a commercial fitout take?',
+    answer:
+      'Most retail shopfits range from 4 to 12 weeks and office fitouts of 200–500 sqm from 8 to 14 weeks, depending on size and complexity. We provide a detailed programme at quoting stage.',
+  },
+  {
+    question: 'Do you provide a fixed-price quote?',
+    answer:
+      'Yes. We provide a detailed fixed-price proposal covering all trades so there are no hidden costs, subject to any variations documented and agreed in writing.',
+  },
+  {
+    question: 'Can you work after hours or in an occupied premises?',
+    answer:
+      'Yes. We regularly stage works or schedule noisy and disruptive tasks outside trading hours, using hoarding, dust control and noise management to keep your business operating.',
+  },
+  {
+    question: 'Are you QBCC licensed?',
+    answer:
+      'Yes. Fix It Up Pty Ltd holds QBCC Licence 15059346, covering commercial building work throughout Queensland.',
+  },
+  {
+    question: 'Do you manufacture your own joinery?',
+    answer:
+      'Yes. We design and build custom joinery in our own Sumner Park workshop, giving us tight control over quality, lead times and cost across every project.',
+  },
+];
+
 export default function HomePage() {
   const featuredServices = services.slice(0, 6);
   const featuredProjects = projects.slice(0, 3);
   const featuredTestimonials = testimonials.slice(0, 2);
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: homeFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* -- Hero Section ---------------------------------------------------- */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         {/* Background slideshow */}
@@ -137,16 +180,16 @@ export default function HomePage() {
 
             {/* Tagline */}
             <p className="text-charcoal/80 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
-              We deliver premium commercial fitouts for retail, hospitality, medical and office
-              spaces — built on over 15 years of craftsmanship, precision joinery and end-to-end
-              project management across South East Queensland.
+              One team for your entire fitout — retail, hospitality, medical and office. We design
+              it, manufacture the joinery in our own Brisbane workshop, and manage every trade, so
+              your doors open on schedule and on budget across South East Queensland.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link
                 href="/get-a-quote"
-                className="group inline-flex items-center gap-2.5 bg-copper-500 hover:bg-copper-600 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 shadow-copper-glow hover:shadow-lg hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 bg-copper-600 hover:bg-copper-700 text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200 shadow-copper-glow hover:shadow-lg hover:-translate-y-0.5"
               >
                 Get a Free Quote
                 <svg
@@ -180,7 +223,7 @@ export default function HomePage() {
             {/* Quick trust signals */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-10">
               {['QBCC Licensed', 'ABN Registered', '15+ Years Experience', '500+ Projects'].map((item) => (
-                <div key={item} className="flex items-center gap-1.5 text-charcoal/40 text-sm">
+                <div key={item} className="flex items-center gap-1.5 text-charcoal/70 text-sm">
                   <svg className="w-3.5 h-3.5 text-copper-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -204,7 +247,7 @@ export default function HomePage() {
                 <div className="mt-0.5 sm:mt-0">{item.icon}</div>
                 <div>
                   <p className="text-charcoal font-bold text-sm sm:text-base leading-snug">{item.label}</p>
-                  <p className="text-gray-400 text-xs sm:text-sm mt-0.5">{item.value}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm mt-0.5">{item.value}</p>
                 </div>
               </div>
             ))}
@@ -243,7 +286,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-copper-600 font-semibold text-sm hover:text-copper-700 transition-colors"
+              className="inline-flex items-center gap-2 text-copper-700 font-semibold text-sm hover:text-copper-800 transition-colors"
             >
               View All Services
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -272,7 +315,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-copper-600 font-semibold text-sm hover:text-copper-700 transition-colors flex-shrink-0"
+              className="inline-flex items-center gap-2 text-copper-700 font-semibold text-sm hover:text-copper-800 transition-colors flex-shrink-0"
             >
               View All Projects
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -321,6 +364,48 @@ export default function HomePage() {
                 company={testimonial.company}
                 rating={testimonial.rating}
               />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- Common Questions ------------------------------------------------ */}
+      <section className="bg-white py-20 sm:py-28 border-t border-gray-100">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-copper-50 border border-copper-200 rounded-full px-4 py-1.5 mb-5">
+              <span className="text-copper-700 text-xs font-semibold uppercase tracking-widest">FAQs</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
+              Common Questions
+            </h2>
+            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Answers to the questions Brisbane and South East Queensland businesses ask us most
+              before starting a fitout.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {homeFaqs.map((faq, i) => (
+              <details
+                key={i}
+                className="group bg-cream rounded-xl border border-gray-100 overflow-hidden"
+              >
+                <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 font-semibold text-charcoal hover:text-copper-700 transition-colors list-none [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-base font-semibold leading-snug">{faq.question}</h3>
+                  <span
+                    className="flex-shrink-0 w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center text-copper-600 transition-transform duration-200 group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-5 pb-5 pt-1 text-sm text-gray-600 leading-relaxed border-t border-gray-100">
+                  {faq.answer}
+                </div>
+              </details>
             ))}
           </div>
         </div>

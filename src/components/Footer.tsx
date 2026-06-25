@@ -15,6 +15,7 @@ const quickLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Projects', href: '/projects' },
+  { label: 'Guides', href: '/guides' },
   { label: 'Contact', href: '/contact' },
   { label: 'Get a Quote', href: '/get-a-quote' },
 ];
@@ -32,6 +33,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { address } = company;
   const fullAddress = `${address.street}, ${address.suburb} ${address.state} ${address.postcode}`;
+  const hasPhone = !company.phone.includes('[');
+  const hasEmail = !company.email.includes('[');
 
   return (
     <footer className="bg-charcoal">
@@ -44,7 +47,7 @@ export default function Footer() {
               Fix It Up
             </span>
           </Link>
-          <p className="text-sm text-white/50 leading-relaxed">
+          <p className="text-sm text-white/70 leading-relaxed">
             {company.tagline}
           </p>
           <address className="not-italic flex flex-col gap-2 mt-1">
@@ -52,7 +55,7 @@ export default function Footer() {
               href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-2 text-sm text-white/50 hover:text-white/80 transition-colors"
+              className="flex items-start gap-2 text-sm text-white/70 hover:text-white transition-colors"
             >
               <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -60,28 +63,52 @@ export default function Footer() {
               </svg>
               {fullAddress}
             </a>
-            <a
-              href={`tel:${company.phone.replace(/\s/g, '')}`}
-              className="flex items-center gap-2 text-sm text-white/50 hover:text-white/80 transition-colors"
-            >
-              <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              {company.phone}
-            </a>
-            <a
-              href={`mailto:${company.email}`}
-              className="flex items-center gap-2 text-sm text-white/50 hover:text-white/80 transition-colors"
-            >
-              <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              {company.email}
-            </a>
+            {hasPhone ? (
+              <a
+                href={`tel:${company.phone.replace(/\s/g, '')}`}
+                className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                {company.phone}
+              </a>
+            ) : (
+              <Link
+                href="/get-a-quote"
+                className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                Request a free quote
+              </Link>
+            )}
+            {hasEmail ? (
+              <a
+                href={`mailto:${company.email}`}
+                className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                {company.email}
+              </a>
+            ) : (
+              <Link
+                href="/contact"
+                className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4 flex-shrink-0 text-copper-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Contact us
+              </Link>
+            )}
           </address>
           <div className="flex flex-col gap-1 mt-1">
-            <span className="text-xs text-white/30">ABN: {company.abn}</span>
-            <span className="text-xs text-white/30">QBCC Licence: {company.qbcc}</span>
+            <span className="text-xs text-white/50">ABN: {company.abn}</span>
+            <span className="text-xs text-white/50">QBCC Licence: {company.qbcc}</span>
           </div>
         </div>
 
@@ -95,7 +122,7 @@ export default function Footer() {
               <li key={item.slug}>
                 <Link
                   href={`/services/${item.slug}`}
-                  className="text-sm text-white/50 hover:text-copper-400 transition-colors"
+                  className="text-sm text-white/70 hover:text-copper-300 transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -114,7 +141,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-white/50 hover:text-copper-400 transition-colors"
+                  className="text-sm text-white/70 hover:text-copper-300 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -133,7 +160,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-white/50 hover:text-copper-400 transition-colors"
+                  className="text-sm text-white/70 hover:text-copper-300 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -146,7 +173,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-white/30 text-center sm:text-left">
+          <p className="text-xs text-white/50 text-center sm:text-left">
             &copy; {currentYear} {company.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
@@ -158,7 +185,7 @@ export default function Footer() {
             </span>
             <Link
               href="/privacy"
-              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              className="inline-flex items-center min-h-[44px] py-2 text-xs text-white/50 hover:text-white/80 transition-colors"
             >
               Privacy Policy
             </Link>

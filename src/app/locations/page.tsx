@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import { locations } from '@/data/locations';
 
 export const metadata: Metadata = {
-  title: 'Service Locations | Commercial Shopfitting Across South East Queensland',
+  title: 'Service Areas | Shopfitting Across SEQ',
   description:
-    'Fix It Up Pty Ltd delivers QBCC licensed commercial shopfitting, joinery manufacturing and fitout services across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan and Toowoomba.',
+    'QBCC licensed commercial shopfitting & fitouts across Brisbane, Gold Coast, Sunshine Coast, Ipswich & Toowoomba. Find your area & get a quote.',
   alternates: {
     canonical: '/locations',
   },
   openGraph: {
-    title: 'Service Locations | Fix It Up Pty Ltd',
+    title: 'Service Areas | Fix It Up Pty Ltd',
     description:
       'Commercial shopfitting and fitout services across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan and Toowoomba.',
   },

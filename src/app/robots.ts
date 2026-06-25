@@ -7,5 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: "https://fixitup.au/sitemap.xml",
+    host: "https://fixitup.au",
   };
 }

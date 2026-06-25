@@ -9,8 +9,8 @@ export const company = {
     state: "QLD",
     postcode: "4074",
   },
-  phone: "[ADD YOUR NUMBER]",
-  email: "[ADD YOUR EMAIL]",
+  phone: "0410 829 334",
+  email: "fixitup@outlook.com",
   yearsExperience: "15+",
   projectsCompleted: "500+",
 } as const;

@@ -42,17 +42,14 @@ export default function ContactForm() {
     resolver: standardSchemaResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 600));
-    alert(
-      `Thank you, ${data.name}! Your enquiry has been received. We'll be in touch shortly.`
-    );
     reset();
   };
 
   const inputBase =
-    'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-copper-500 transition-colors';
-  const inputNormal = `${inputBase} bg-white border-gray-200 hover:border-gray-300 focus:border-copper-500`;
+    'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-copper-600 transition-colors';
+  const inputNormal = `${inputBase} bg-white border-gray-200 hover:border-gray-300 focus:border-copper-600`;
   const inputError = `${inputBase} bg-white border-red-300 focus:ring-red-400`;
   const labelBase = 'block text-sm font-medium text-charcoal/80 mb-1.5';
   const errorBase = 'mt-1.5 text-xs text-red-500';
@@ -74,10 +71,12 @@ export default function ContactForm() {
           autoComplete="name"
           placeholder="Jane Smith"
           className={errors.name ? inputError : inputNormal}
+          aria-invalid={errors.name ? true : undefined}
+          aria-describedby={errors.name ? 'contact-name-error' : undefined}
           {...register('name')}
         />
         {errors.name && (
-          <p className={errorBase} role="alert">
+          <p id="contact-name-error" className={errorBase} role="alert">
             {errors.name.message}
           </p>
         )}
@@ -87,7 +86,7 @@ export default function ContactForm() {
       <div>
         <label htmlFor="contact-company" className={labelBase}>
           Company{' '}
-          <span className="text-gray-400 font-normal">(optional)</span>
+          <span className="text-gray-500 font-normal">(optional)</span>
         </label>
         <input
           id="contact-company"
@@ -111,10 +110,12 @@ export default function ContactForm() {
             autoComplete="tel"
             placeholder="07 3000 0000"
             className={errors.phone ? inputError : inputNormal}
+            aria-invalid={errors.phone ? true : undefined}
+            aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
             {...register('phone')}
           />
           {errors.phone && (
-            <p className={errorBase} role="alert">
+            <p id="contact-phone-error" className={errorBase} role="alert">
               {errors.phone.message}
             </p>
           )}
@@ -130,10 +131,12 @@ export default function ContactForm() {
             autoComplete="email"
             placeholder="jane@example.com"
             className={errors.email ? inputError : inputNormal}
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? 'contact-email-error' : undefined}
             {...register('email')}
           />
           {errors.email && (
-            <p className={errorBase} role="alert">
+            <p id="contact-email-error" className={errorBase} role="alert">
               {errors.email.message}
             </p>
           )}
@@ -148,6 +151,8 @@ export default function ContactForm() {
         <select
           id="contact-project-type"
           className={`${errors.projectType ? inputError : inputNormal} appearance-none cursor-pointer`}
+          aria-invalid={errors.projectType ? true : undefined}
+          aria-describedby={errors.projectType ? 'contact-project-type-error' : undefined}
           {...register('projectType')}
           defaultValue=""
         >
@@ -162,7 +167,7 @@ export default function ContactForm() {
           ))}
         </select>
         {errors.projectType && (
-          <p className={errorBase} role="alert">
+          <p id="contact-project-type-error" className={errorBase} role="alert">
             {errors.projectType.message}
           </p>
         )}
@@ -178,27 +183,31 @@ export default function ContactForm() {
           rows={5}
           placeholder="Tell us about your project — scope, location, timeline…"
           className={`${errors.message ? inputError : inputNormal} resize-y`}
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? 'contact-message-error' : undefined}
           {...register('message')}
         />
         {errors.message && (
-          <p className={errorBase} role="alert">
+          <p id="contact-message-error" className={errorBase} role="alert">
             {errors.message.message}
           </p>
         )}
       </div>
 
-      {/* Success message */}
-      {isSubmitSuccessful && (
-        <p className="text-sm text-copper-700 bg-copper-50 border border-copper-200 rounded-lg px-4 py-3">
-          Your enquiry has been sent. We&apos;ll be in touch shortly!
-        </p>
-      )}
+      {/* Status banner (success / submission feedback) */}
+      <div role="status" aria-live="polite">
+        {isSubmitSuccessful && (
+          <p className="text-sm text-copper-700 bg-copper-50 border border-copper-200 rounded-lg px-4 py-3">
+            Thank you &mdash; your enquiry has been received. We&apos;ll be in touch shortly!
+          </p>
+        )}
+      </div>
 
       {/* Submit */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-copper-500 text-white text-sm font-semibold hover:bg-copper-600 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-copper-600 text-white text-sm font-semibold hover:bg-copper-700 transition-colors shadow-copper-glow disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <>

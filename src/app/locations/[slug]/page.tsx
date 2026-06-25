@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { locations, getLocationBySlug } from '@/data/locations';
+import { serviceAreas } from '@/data/serviceAreas';
+import { getServiceBySlug } from '@/data/services';
+import { guides } from '@/data/guides';
 import CTASection from '@/components/CTASection';
 
 export function generateStaticParams() {
@@ -48,17 +51,39 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
   const location = getLocationBySlug(params.slug);
   if (!location) notFound();
 
+  const relatedAreas = serviceAreas.filter((area) => area.locationSlug === params.slug);
+
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Locations', item: `${BASE_URL}/locations` },
+    '@graph': [
       {
-        '@type': 'ListItem',
-        position: 3,
-        name: location.name,
-        item: `${BASE_URL}/locations/${location.slug}`,
+        '@type': 'Service',
+        name: `Commercial Shopfitting in ${location.name}`,
+        serviceType: 'Commercial shopfitting and fitout',
+        areaServed: { '@type': 'City', name: location.name },
+        provider: { '@id': `${BASE_URL}/#business` },
+        url: `${BASE_URL}/locations/${location.slug}`,
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Locations', item: `${BASE_URL}/locations` },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: location.name,
+            item: `${BASE_URL}/locations/${location.slug}`,
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: location.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+        })),
       },
     ],
   };
@@ -222,6 +247,119 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* -- 4b. Our services in {location} (curated fitout pages) ----------- */}
+      {relatedAreas.length > 0 && (
+        <section className="bg-cream py-16 sm:py-20 border-t border-gray-100">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="section-label">Specialist Fitouts</p>
+              <h2 className="section-title">Our Services in {location.name}</h2>
+              <p className="section-subtitle mx-auto mt-4">
+                Detailed local guides to our most-requested fitout types in {location.name}.
+              </p>
+            </div>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {relatedAreas.map((area) => {
+                const service = getServiceBySlug(area.serviceSlug);
+                return (
+                  <li key={area.slug}>
+                    <Link
+                      href={`/fitouts/${area.slug}`}
+                      className="group flex flex-col h-full rounded-xl bg-white border border-gray-100 px-6 py-5 hover:border-copper-300 hover:shadow-card-hover transition-all duration-200"
+                    >
+                      <span className="text-base font-semibold text-charcoal group-hover:text-copper-600 transition-colors duration-200">
+                        {service ? service.title : area.h1}
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-copper-600 mt-3 group-hover:gap-2 transition-all duration-200">
+                        View {location.name} guide
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* -- 4c. Local FAQ -------------------------------------------------- */}
+      <section className="bg-white py-16 sm:py-20 border-t border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="section-label">FAQs</p>
+              <h2 className="section-title">Commercial Fitouts in {location.name} — Your Questions</h2>
+            </div>
+            <div className="space-y-3">
+              {location.faqs.map((faq, i) => (
+                <details
+                  key={i}
+                  className="group bg-cream rounded-xl border border-gray-100 overflow-hidden"
+                >
+                  <summary className="flex cursor-pointer select-none items-center justify-between gap-4 p-5 font-semibold text-charcoal hover:text-copper-600 transition-colors list-none [&::-webkit-details-marker]:hidden">
+                    <h3 className="text-base font-semibold leading-snug">{faq.question}</h3>
+                    <span
+                      className="flex-shrink-0 w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center text-copper-500 transition-transform duration-200 group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <div className="px-5 pb-5 pt-1 text-sm text-gray-500 leading-relaxed border-t border-gray-100">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -- 4d. Related guides --------------------------------------------- */}
+      <section className="bg-cream py-16 sm:py-20 border-t border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="section-label">Plan Your Project</p>
+            <h2 className="section-title">Fitout Guides for {location.name} Businesses</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {guides.map((guide) => (
+              <Link
+                key={guide.slug}
+                href={`/guides/${guide.slug}`}
+                className="group flex flex-col rounded-xl bg-white border border-gray-100 px-6 py-5 hover:border-copper-300 hover:shadow-card-hover transition-all duration-200"
+              >
+                <span className="text-xs font-semibold text-copper-600 uppercase tracking-wider mb-2">
+                  {guide.category} · {guide.readTime}
+                </span>
+                <span className="text-base font-semibold text-charcoal group-hover:text-copper-600 transition-colors duration-200 leading-snug">
+                  {guide.title}
+                </span>
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-copper-600 mt-3 group-hover:gap-2 transition-all duration-200">
+                  Read guide
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

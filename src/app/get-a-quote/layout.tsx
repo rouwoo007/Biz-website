@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Get a Free Quote",
+  title: "Free Fitout Quote | Brisbane Shopfitting",
   description:
-    "Request a free, no-obligation quote from Fix It Up Pty Ltd for your commercial shopfitting, joinery or fitout project in Brisbane & South East Queensland.",
+    "Request a free, no-obligation quote for your commercial shopfitting, joinery or fitout project across Brisbane & SEQ. QBCC licensed.",
   alternates: {
     canonical: "/get-a-quote",
   },
   openGraph: {
-    title: "Get a Free Quote | Fix It Up Pty Ltd",
+    title: "Free Fitout Quote | Brisbane Shopfitting",
     description:
       "Request a free quote for your commercial fitout project. QBCC licensed shopfitters serving Brisbane & SEQ.",
   },

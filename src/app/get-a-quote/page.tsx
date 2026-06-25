@@ -20,13 +20,16 @@ const step1Schema = z.object({
 const step2Schema = z.object({
   projectType: z.string().min(1, 'Please select a project type'),
   location: z.string().min(2, 'Please enter a suburb or location'),
+  siteAddress: z.string().optional(),
   budgetRange: z.string().min(1, 'Please select a budget range'),
   timeline: z.string().min(1, 'Please select a timeline'),
 });
 
 const step3Schema = z.object({
-  description: z.string().min(20, 'Please provide at least 20 characters describing your project'),
+  description: z.string().optional(),
   heardAboutUs: z.string().min(1, 'Please let us know how you found us'),
+  // Honeypot — must stay empty. Hidden from humans; bots tend to fill it.
+  company_website: z.string().optional(),
 });
 
 type Step1Data = z.infer<typeof step1Schema>;
@@ -79,6 +82,10 @@ const HEARD_ABOUT_US = [
   { value: 'other', label: 'Other' },
 ];
 
+// Map a stored option value back to its human-readable label for the email.
+const labelFor = (options: { value: string; label: string }[], value: string) =>
+  options.find((o) => o.value === value)?.label ?? value;
+
 // --- Shared style helpers ----------------------------------------------------
 
 const inputBase =
@@ -106,13 +113,14 @@ function StepIndicator({ current }: { current: number }) {
           <div key={step.number} className="flex items-center">
             <div className="flex flex-col items-center">
               <div
+                aria-current={isActive ? 'step' : undefined}
                 className={[
                   'w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors',
                   isComplete
                     ? 'bg-copper-500 text-white'
                     : isActive
                     ? 'bg-copper-500 text-white ring-4 ring-copper-100'
-                    : 'bg-gray-100 border border-gray-200 text-gray-400',
+                    : 'bg-gray-100 border border-gray-200 text-gray-600',
                 ].join(' ')}
               >
                 {isComplete ? (
@@ -132,7 +140,7 @@ function StepIndicator({ current }: { current: number }) {
               <span
                 className={[
                   'mt-2 text-xs font-medium whitespace-nowrap',
-                  isActive ? 'text-copper-600' : isComplete ? 'text-gray-500' : 'text-gray-300',
+                  isActive ? 'text-copper-700' : isComplete ? 'text-gray-500' : 'text-gray-500',
                 ].join(' ')}
               >
                 {step.label}
@@ -156,12 +164,21 @@ function StepIndicator({ current }: { current: number }) {
 
 // --- Step 1 ------------------------------------------------------------------
 
-function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
+function Step1({
+  onNext,
+  defaultValues,
+}: {
+  onNext: (data: Step1Data) => void;
+  defaultValues?: Partial<Step1Data>;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Step1Data>({ resolver: standardSchemaResolver(step1Schema) });
+  } = useForm<Step1Data>({
+    resolver: standardSchemaResolver(step1Schema),
+    defaultValues,
+  });
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate className="space-y-5">
@@ -175,9 +192,11 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
           autoComplete="name"
           placeholder="Jane Smith"
           className={errors.name ? inputError : inputNormal}
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? 'q-name-error' : undefined}
           {...register('name')}
         />
-        {errors.name && <p className={errorBase} role="alert">{errors.name.message}</p>}
+        {errors.name && <p id="q-name-error" className={errorBase} role="alert">{errors.name.message}</p>}
       </div>
 
       <div>
@@ -206,9 +225,11 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
             autoComplete="tel"
             placeholder="07 3000 0000"
             className={errors.phone ? inputError : inputNormal}
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? 'q-phone-error' : undefined}
             {...register('phone')}
           />
-          {errors.phone && <p className={errorBase} role="alert">{errors.phone.message}</p>}
+          {errors.phone && <p id="q-phone-error" className={errorBase} role="alert">{errors.phone.message}</p>}
         </div>
 
         <div>
@@ -221,9 +242,11 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
             autoComplete="email"
             placeholder="jane@example.com"
             className={errors.email ? inputError : inputNormal}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'q-email-error' : undefined}
             {...register('email')}
           />
-          {errors.email && <p className={errorBase} role="alert">{errors.email.message}</p>}
+          {errors.email && <p id="q-email-error" className={errorBase} role="alert">{errors.email.message}</p>}
         </div>
       </div>
 
@@ -237,15 +260,27 @@ function Step1({ onNext }: { onNext: (data: Step1Data) => void }) {
 function Step2({
   onNext,
   onBack,
+  defaultValues,
 }: {
   onNext: (data: Step2Data) => void;
   onBack: () => void;
+  defaultValues?: Partial<Step2Data>;
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Step2Data>({ resolver: standardSchemaResolver(step2Schema) });
+  } = useForm<Step2Data>({
+    resolver: standardSchemaResolver(step2Schema),
+    defaultValues: {
+      projectType: '',
+      location: '',
+      siteAddress: '',
+      budgetRange: '',
+      timeline: '',
+      ...defaultValues,
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit(onNext)} noValidate className="space-y-5">
@@ -255,8 +290,9 @@ function Step2({
         </label>
         <select
           id="q-project-type"
-          defaultValue=""
           className={`${errors.projectType ? inputError : inputNormal} appearance-none cursor-pointer`}
+          aria-invalid={!!errors.projectType}
+          aria-describedby={errors.projectType ? 'q-project-type-error' : undefined}
           {...register('projectType')}
         >
           {PROJECT_TYPES.map((opt) => (
@@ -265,7 +301,7 @@ function Step2({
             </option>
           ))}
         </select>
-        {errors.projectType && <p className={errorBase} role="alert">{errors.projectType.message}</p>}
+        {errors.projectType && <p id="q-project-type-error" className={errorBase} role="alert">{errors.projectType.message}</p>}
       </div>
 
       <div>
@@ -277,9 +313,29 @@ function Step2({
           type="text"
           placeholder="e.g. Fortitude Valley, Brisbane QLD"
           className={errors.location ? inputError : inputNormal}
+          aria-invalid={!!errors.location}
+          aria-describedby={errors.location ? 'q-location-error' : undefined}
           {...register('location')}
         />
-        {errors.location && <p className={errorBase} role="alert">{errors.location.message}</p>}
+        {errors.location && <p id="q-location-error" className={errorBase} role="alert">{errors.location.message}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="q-site-address" className={labelBase}>
+          Full Site Address{' '}
+          <span className="text-gray-400 font-normal">(if known)</span>
+        </label>
+        <input
+          id="q-site-address"
+          type="text"
+          autoComplete="street-address"
+          placeholder="e.g. Shop 4, 120 Edward Street, Brisbane City QLD 4000"
+          className={inputNormal}
+          {...register('siteAddress')}
+        />
+        <p className="mt-1.5 text-xs text-gray-400">
+          The exact address of the property or tenancy where the work will take place.
+        </p>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-5">
@@ -289,8 +345,9 @@ function Step2({
           </label>
           <select
             id="q-budget"
-            defaultValue=""
             className={`${errors.budgetRange ? inputError : inputNormal} appearance-none cursor-pointer`}
+            aria-invalid={!!errors.budgetRange}
+            aria-describedby={errors.budgetRange ? 'q-budget-error' : undefined}
             {...register('budgetRange')}
           >
             {BUDGET_RANGES.map((opt) => (
@@ -299,7 +356,7 @@ function Step2({
               </option>
             ))}
           </select>
-          {errors.budgetRange && <p className={errorBase} role="alert">{errors.budgetRange.message}</p>}
+          {errors.budgetRange && <p id="q-budget-error" className={errorBase} role="alert">{errors.budgetRange.message}</p>}
         </div>
 
         <div>
@@ -308,8 +365,9 @@ function Step2({
           </label>
           <select
             id="q-timeline"
-            defaultValue=""
             className={`${errors.timeline ? inputError : inputNormal} appearance-none cursor-pointer`}
+            aria-invalid={!!errors.timeline}
+            aria-describedby={errors.timeline ? 'q-timeline-error' : undefined}
             {...register('timeline')}
           >
             {TIMELINES.map((opt) => (
@@ -318,7 +376,7 @@ function Step2({
               </option>
             ))}
           </select>
-          {errors.timeline && <p className={errorBase} role="alert">{errors.timeline.message}</p>}
+          {errors.timeline && <p id="q-timeline-error" className={errorBase} role="alert">{errors.timeline.message}</p>}
         </div>
       </div>
 
@@ -333,31 +391,56 @@ function Step3({
   onSubmit,
   onBack,
   isSubmitting,
+  defaultValues,
 }: {
   onSubmit: (data: Step3Data) => void;
   onBack: () => void;
   isSubmitting: boolean;
+  defaultValues?: Partial<Step3Data>;
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Step3Data>({ resolver: standardSchemaResolver(step3Schema) });
+  } = useForm<Step3Data>({
+    resolver: standardSchemaResolver(step3Schema),
+    defaultValues: {
+      description: '',
+      heardAboutUs: '',
+      company_website: '',
+      ...defaultValues,
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+      {/* Honeypot: hidden from real users, catches spam bots that auto-fill fields. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="q-company-website">Company website</label>
+        <input
+          id="q-company-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register('company_website')}
+        />
+      </div>
+
       <div>
         <label htmlFor="q-description" className={labelBase}>
-          Project Description <span className="text-copper-600">*</span>
+          Project Description{' '}
+          <span className="text-gray-400 font-normal">(optional)</span>
         </label>
         <textarea
           id="q-description"
           rows={5}
           placeholder="Tell us about your project — scope, special requirements, materials, finishes, etc."
           className={`${errors.description ? inputError : inputNormal} resize-y`}
+          aria-invalid={!!errors.description}
+          aria-describedby={errors.description ? 'q-description-error' : undefined}
           {...register('description')}
         />
-        {errors.description && <p className={errorBase} role="alert">{errors.description.message}</p>}
+        {errors.description && <p id="q-description-error" className={errorBase} role="alert">{errors.description.message}</p>}
       </div>
 
       <div>
@@ -399,8 +482,9 @@ function Step3({
         </label>
         <select
           id="q-heard"
-          defaultValue=""
           className={`${errors.heardAboutUs ? inputError : inputNormal} appearance-none cursor-pointer`}
+          aria-invalid={!!errors.heardAboutUs}
+          aria-describedby={errors.heardAboutUs ? 'q-heard-error' : undefined}
           {...register('heardAboutUs')}
         >
           {HEARD_ABOUT_US.map((opt) => (
@@ -409,7 +493,7 @@ function Step3({
             </option>
           ))}
         </select>
-        {errors.heardAboutUs && <p className={errorBase} role="alert">{errors.heardAboutUs.message}</p>}
+        {errors.heardAboutUs && <p id="q-heard-error" className={errorBase} role="alert">{errors.heardAboutUs.message}</p>}
       </div>
 
       <StepNavigation step={3} onBack={onBack} isSubmitting={isSubmitting} />
@@ -514,8 +598,11 @@ function StepNavigation({
 export default function GetAQuotePage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [step1Data, setStep1Data] = useState<Step1Data | null>(null);
-  const [, setStep2Data] = useState<Step2Data | null>(null);
+  const [step2Data, setStep2Data] = useState<Step2Data | null>(null);
+  const [step3Data, setStep3Data] = useState<Step3Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedName, setSubmittedName] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleStep1 = (data: Step1Data) => {
     setStep1Data(data);
@@ -529,17 +616,74 @@ export default function GetAQuotePage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleStep3 = async (_data: Step3Data) => {
+  const handleStep3 = async (data: Step3Data) => {
+    setStep3Data(data);
+    setSubmitError(null);
+
+    // Silently drop bot submissions (honeypot field filled in).
+    if (data.company_website) {
+      setSubmittedName(step1Data?.name ?? null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const s1 = step1Data;
+    const s2 = step2Data;
+    if (!s1 || !s2) {
+      setSubmitError('Something went wrong — please start the form again.');
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError(
+        'The quote form is not fully set up yet. Please email fixitup@outlook.com or call 0410 829 334 and we’ll help you straight away.'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSubmitting(false);
-    alert(
-      `Thank you, ${step1Data?.name}! Your quote request has been received. Our team will be in touch within one business day.`
-    );
-    setCurrentStep(1);
-    setStep1Data(null);
-    setStep2Data(null);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New Quote Request — ${s1.name}`,
+          from_name: 'Fix It Up Website',
+          replyto: s1.email,
+          // Human-readable fields land directly in the notification email.
+          Name: s1.name,
+          Company: s1.company || '—',
+          Phone: s1.phone,
+          Email: s1.email,
+          'Project Type': labelFor(PROJECT_TYPES, s2.projectType),
+          'Location / Suburb': s2.location,
+          'Site Address': s2.siteAddress || '—',
+          'Budget Range': labelFor(BUDGET_RANGES, s2.budgetRange),
+          Timeline: labelFor(TIMELINES, s2.timeline),
+          'How they heard about us': labelFor(HEARD_ABOUT_US, data.heardAboutUs),
+          'Project Description': data.description || '—',
+        }),
+      });
+
+      const result = await res.json();
+      if (!res.ok || !result.success) {
+        throw new Error(result?.message || 'Submission failed. Please try again.');
+      }
+
+      setSubmittedName(s1.name);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      setSubmitError(
+        'Sorry, we couldn’t send your request just now. Please try again, or email fixitup@outlook.com directly.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const isSubmitted = submittedName !== null;
 
   return (
     <>
@@ -564,38 +708,116 @@ export default function GetAQuotePage() {
         <div className="container mx-auto py-14 sm:py-20">
           <div className="max-w-2xl mx-auto">
 
-            <StepIndicator current={currentStep} />
-
-            <div className="rounded-xl bg-cream border border-gray-100 p-6 sm:p-10">
-              <div className="mb-7">
-                <p className="text-xs font-semibold text-copper-600 uppercase tracking-widest mb-1">
-                  Step {currentStep} of {STEPS.length}
-                </p>
-                <h2 className="text-xl sm:text-2xl font-bold text-charcoal">
-                  {STEPS[currentStep - 1].label}
+            {isSubmitted ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="rounded-xl bg-cream border border-copper-200 p-8 sm:p-10 text-center"
+              >
+                <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-copper-50 text-copper-600 mb-5">
+                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <h2 className="text-2xl font-bold text-charcoal mb-3">
+                  Thank you{submittedName ? `, ${submittedName}` : ''}!
                 </h2>
+                <p className="text-base text-gray-600 leading-relaxed max-w-md mx-auto">
+                  Your quote request has been received. Our team will review your project
+                  details and be in touch within one business day to organise your free
+                  site visit.
+                </p>
               </div>
+            ) : (
+              <>
+                {/* What happens next */}
+                <div className="rounded-xl bg-copper-50 border border-copper-200 p-6 sm:p-7 mb-10">
+                  <h2 className="text-sm font-semibold text-copper-700 uppercase tracking-widest mb-4">
+                    What happens next
+                  </h2>
+                  <ol className="space-y-3">
+                    {[
+                      'We review your details and respond within one business day.',
+                      'We arrange a free, no-obligation site visit to understand your space.',
+                      'You receive a detailed, fixed-price written proposal.',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-copper-500 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                          {i + 1}
+                        </span>
+                        <span className="text-sm text-charcoal/80 leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
 
-              {currentStep === 1 && <Step1 onNext={handleStep1} />}
-              {currentStep === 2 && (
-                <Step2
-                  onNext={handleStep2}
-                  onBack={() => setCurrentStep(1)}
-                />
-              )}
-              {currentStep === 3 && (
-                <Step3
-                  onSubmit={handleStep3}
-                  onBack={() => setCurrentStep(2)}
-                  isSubmitting={isSubmitting}
-                />
-              )}
-            </div>
+                <StepIndicator current={currentStep} />
 
-            <p className="mt-6 text-center text-xs text-gray-400 leading-relaxed">
-              Your information is kept private and will only be used to prepare
-              your quote. No spam, ever.
-            </p>
+                <div className="rounded-xl bg-cream border border-gray-100 p-6 sm:p-10">
+                  <div className="mb-7">
+                    <p
+                      role="status"
+                      aria-live="polite"
+                      className="text-xs font-semibold text-copper-700 uppercase tracking-widest mb-1"
+                    >
+                      Step {currentStep} of {STEPS.length}
+                    </p>
+                    <h2 className="text-xl sm:text-2xl font-bold text-charcoal">
+                      {STEPS[currentStep - 1].label}
+                    </h2>
+                  </div>
+
+                  {submitError && (
+                    <div
+                      role="alert"
+                      className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3"
+                    >
+                      <svg
+                        className="w-5 h-5 flex-shrink-0 text-red-500 mt-0.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <p className="text-sm text-red-700 leading-relaxed">{submitError}</p>
+                    </div>
+                  )}
+
+                  {currentStep === 1 && (
+                    <Step1 onNext={handleStep1} defaultValues={step1Data ?? undefined} />
+                  )}
+                  {currentStep === 2 && (
+                    <Step2
+                      onNext={handleStep2}
+                      onBack={() => setCurrentStep(1)}
+                      defaultValues={step2Data ?? undefined}
+                    />
+                  )}
+                  {currentStep === 3 && (
+                    <Step3
+                      onSubmit={handleStep3}
+                      onBack={() => {
+                        setSubmitError(null);
+                        setCurrentStep(2);
+                      }}
+                      isSubmitting={isSubmitting}
+                      defaultValues={step3Data ?? undefined}
+                    />
+                  )}
+                </div>
+
+                <p className="mt-6 text-center text-xs text-gray-500 leading-relaxed">
+                  Your information is kept private and will only be used to prepare
+                  your quote. No spam, ever.
+                </p>
+              </>
+            )}
 
           </div>
         </div>

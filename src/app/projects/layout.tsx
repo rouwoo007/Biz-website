@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "Our Projects",
+    default: "Commercial Fitout Project Portfolio",
     template: "%s | Fix It Up Pty Ltd",
   },
   description:
-    "Browse Fix It Up Pty Ltd's portfolio of completed commercial shopfitting, joinery and fitout projects across Brisbane & South East Queensland.",
+    "Browse our portfolio of completed commercial shopfitting, joinery & fitout projects across Brisbane & SEQ. See our work, then get a quote.",
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
-    title: "Our Projects | Fix It Up Pty Ltd",
+    title: "Commercial Fitout Project Portfolio | Fix It Up Pty Ltd",
     description:
       "View our portfolio of completed commercial shopfitting and fitout projects in Brisbane & SEQ.",
   },
