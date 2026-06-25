@@ -13,7 +13,7 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fixitup.com.au"),
+  metadataBase: new URL("https://fixitup.au"),
   title: {
     default: "Fix It Up | Commercial Shopfitting & Joinery Brisbane",
     template: "%s | Fix It Up Pty Ltd",
