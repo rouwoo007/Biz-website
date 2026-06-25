@@ -1,13 +1,16 @@
 import Script from 'next/script';
 
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 /**
- * Google Analytics 4 placeholder component.
- * Replace GA_MEASUREMENT_ID with your real tracking ID before going live.
- * Place this component inside the <head> of your root layout.
+ * Google Analytics 4 component.
+ * Reads the Measurement ID from the NEXT_PUBLIC_GA_MEASUREMENT_ID env var
+ * (set it in .env.local for local dev and in your host's env settings for prod).
+ * Renders nothing if the ID is missing, so local/dev builds don't send data.
  */
 export default function GoogleAnalytics() {
+  if (!GA_MEASUREMENT_ID) return null;
+
   return (
     <>
       {/* Load the GA4 gtag.js script */}
