@@ -20,11 +20,15 @@ export async function generateMetadata({
 
   const shortDesc = `QBCC licensed commercial shopfitting & joinery in ${location.name}. Fix It Up delivers fitouts for retail, hospitality, medical & office spaces.`;
   return {
-    title: `Commercial Shopfitting in ${location.name}`,
+    title: { absolute: `Shopfitting ${location.name} | Commercial Fitout & Joinery` },
     description: shortDesc,
+    alternates: {
+      canonical: `/locations/${location.slug}`,
+    },
     openGraph: {
       title: `Commercial Shopfitting in ${location.name} | Fix It Up Pty Ltd`,
       description: shortDesc,
+      url: `/locations/${location.slug}`,
     },
   };
 }
@@ -41,12 +45,33 @@ const services = [
 ];
 
 /* ─── Page ───────────────────────────────────────────────────────── */
+const BASE_URL = 'https://fixitup.au';
+
 export default function LocationPage({ params }: { params: { slug: string } }) {
   const location = getLocationBySlug(params.slug);
   if (!location) notFound();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Locations', item: `${BASE_URL}/locations` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: location.name,
+        item: `${BASE_URL}/locations/${location.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── 1. Hero ──────────────────────────────────────────────── */}
       <section className="relative bg-navy overflow-hidden">
         {/* Subtle grid overlay */}

@@ -16,21 +16,74 @@ export function generateMetadata({
   const service = services.find((s) => s.slug === params.slug);
   if (!service) return {};
   return {
-    title: service.title,
+    title: { absolute: service.metaTitle },
     description: service.shortDescription,
+    alternates: {
+      canonical: `/services/${service.slug}`,
+    },
     openGraph: {
-      title: `${service.title} | Fix It Up Pty Ltd`,
+      title: service.metaTitle,
       description: service.shortDescription,
+      url: `/services/${service.slug}`,
     },
   };
 }
+
+const BASE_URL = 'https://fixitup.au';
 
 export default function ServicePage({ params }: { params: { slug: string } }) {
   const service = services.find((s) => s.slug === params.slug);
   if (!service) notFound();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: service.title,
+        description: service.shortDescription,
+        url: `${BASE_URL}/services/${service.slug}`,
+        serviceType: service.title,
+        areaServed: { '@type': 'State', name: 'Queensland' },
+        provider: {
+          '@type': 'LocalBusiness',
+          name: 'Fix It Up Pty Ltd',
+          url: BASE_URL,
+        },
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: service.faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: `${BASE_URL}/services` },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: service.title,
+            item: `${BASE_URL}/services/${service.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-navy py-20 sm:py-28">
         <div className="container mx-auto">

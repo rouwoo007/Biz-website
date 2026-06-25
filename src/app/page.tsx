@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import ServiceCard from '@/components/ServiceCard';
 import ProjectCard from '@/components/ProjectCard';
@@ -6,6 +7,12 @@ import CTASection from '@/components/CTASection';
 import { services } from '@/data/services';
 import { projects } from '@/data/projects';
 import { testimonials } from '@/data/testimonials';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 // ─── Service icon map ──────────────────────────────────────────────────────────
 const serviceIcons: Record<string, React.ReactNode> = {

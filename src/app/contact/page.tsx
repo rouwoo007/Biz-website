@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Contact Us',
   description:
     'Contact Fix It Up for commercial shopfitting & fitout enquiries in Brisbane & SEQ. Call us or request a free quote online.',
+  alternates: {
+    canonical: '/contact',
+  },
   openGraph: {
     title: 'Contact Us | Fix It Up Pty Ltd',
     description:
