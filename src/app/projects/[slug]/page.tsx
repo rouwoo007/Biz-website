@@ -96,7 +96,7 @@ export default function ProjectPage({ params }: Props) {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -141,7 +141,7 @@ export default function ProjectPage({ params }: Props) {
           <div className="max-w-4xl mx-auto space-y-10">
             {/* Project Photo */}
             <div>
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
+              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
                 Project Photography
               </h2>
               <div className="rounded-2xl overflow-hidden shadow-lg">
@@ -158,7 +158,7 @@ export default function ProjectPage({ params }: Props) {
 
             {/* Description */}
             <div>
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
+              <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
                 Project Overview
               </h2>
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
@@ -167,21 +167,23 @@ export default function ProjectPage({ params }: Props) {
             </div>
 
             {/* Floorplan */}
-            <div>
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">
-                Floorplan
-              </h2>
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-                <Image
-                  src={project.floorplan}
-                  alt={`${project.name} — floorplan`}
-                  width={800}
-                  height={600}
-                  unoptimized={true}
-                  className="w-full h-auto object-cover"
-                />
+            {project.floorplan && (
+              <div>
+                <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
+                  Floorplan
+                </h2>
+                <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                  <Image
+                    src={project.floorplan}
+                    alt={`${project.name} — floorplan`}
+                    width={800}
+                    height={600}
+                    unoptimized={true}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Back link (bottom) */}
             <div className="pt-4">
@@ -210,6 +212,6 @@ export default function ProjectPage({ params }: Props) {
         heading="Inspired by What You See?"
         subtext="Get in touch with our team to discuss your commercial fitout project. We provide free, no-obligation quotes across Brisbane and South East Queensland."
       />
-    </main>
+    </div>
   );
 }

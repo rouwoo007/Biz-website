@@ -116,8 +116,8 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-copper-50 text-copper-700 text-xs font-semibold">
                 {guide.category}
               </span>
-              <span className="text-xs font-medium text-gray-400">{guide.readTime}</span>
-              <span className="text-xs font-medium text-gray-400">
+              <span className="text-xs font-medium text-gray-600">{guide.readTime}</span>
+              <span className="text-xs font-medium text-gray-600">
                 Updated {formatDate(guide.updated)}
               </span>
             </div>
@@ -221,7 +221,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
                         </table>
                       </div>
                       {section.table.caption && (
-                        <p className="mt-3 text-xs text-gray-400 italic leading-relaxed">
+                        <p className="mt-3 text-xs text-gray-600 italic leading-relaxed">
                           {section.table.caption}
                         </p>
                       )}

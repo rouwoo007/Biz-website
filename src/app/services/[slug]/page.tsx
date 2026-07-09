@@ -8,7 +8,12 @@ import { guides } from '@/data/guides';
 import CTASection from '@/components/CTASection';
 
 export function generateStaticParams() {
-  return services.map((service) => ({ slug: service.slug }));
+  // /services/shopfitting is a bespoke "Commercial Shopfitters Brisbane" pillar
+  // page (src/app/services/shopfitting/page.tsx), so exclude it here to avoid a
+  // duplicate-route conflict at build time.
+  return services
+    .filter((service) => service.slug !== 'shopfitting')
+    .map((service) => ({ slug: service.slug }));
 }
 
 export function generateMetadata({
@@ -28,6 +33,10 @@ export function generateMetadata({
       title: service.metaTitle,
       description: service.shortDescription,
       url: `/services/${service.slug}`,
+    },
+    twitter: {
+      title: service.metaTitle,
+      description: service.shortDescription,
     },
   };
 }

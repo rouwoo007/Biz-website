@@ -47,7 +47,7 @@ const credentials = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <>
       {/* -- Hero ------------------------------------------------------------ */}
       <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto text-center">
@@ -181,7 +181,7 @@ export default function AboutPage() {
                   </svg>
                 </span>
                 <div className="flex flex-col">
-                  <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     {cred.label}
                   </span>
                   <span className="text-base font-bold text-charcoal mt-0.5">
@@ -196,6 +196,6 @@ export default function AboutPage() {
 
       {/* -- CTA ------------------------------------------------------------- */}
       <CTASection />
-    </main>
+    </>
   );
 }

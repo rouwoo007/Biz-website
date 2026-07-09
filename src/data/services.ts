@@ -16,7 +16,7 @@ export const services: Service[] = [
     title: 'Shopfitting',
     metaTitle: 'Shopfitting Brisbane | Commercial Shopfitters | Fix It Up',
     shortDescription:
-      'End-to-end shopfitting solutions for retail, hospitality and commercial spaces across Brisbane and South East Queensland.',
+      'End-to-end shopfitting for retail, hospitality & commercial spaces across Brisbane & SEQ — one team for every trade, from design to handover. Get a free quote.',
     description:
       'From concept through to completion, Fix It Up Pty Ltd delivers high-quality shopfitting that transforms empty shells into fully functioning retail and commercial spaces. Our QBCC-licensed tradespeople manage every trade, timeline and detail so your doors open on schedule.',
     icon: 'store',
@@ -89,7 +89,7 @@ export const services: Service[] = [
     title: 'Commercial Fitout',
     metaTitle: 'Commercial Fitout Brisbane | Office & Retail Fitouts',
     shortDescription:
-      'Turnkey commercial fitout services for offices, showrooms, gyms and mixed-use spaces throughout Brisbane and SEQ.',
+      'Turnkey commercial fitouts for offices, showrooms, gyms & mixed-use spaces across Brisbane & SEQ — fixed-price and fully project managed. Get a free quote.',
     description:
       'Fix It Up Pty Ltd delivers complete commercial fitouts that align with your brand, workflow and budget. We self-perform joinery and manage every subcontractor, giving you a single point of contact from strip-out to final clean.',
     icon: 'building',
@@ -162,7 +162,7 @@ export const services: Service[] = [
     title: 'Joinery Manufacturing',
     metaTitle: 'Commercial Joinery Brisbane | Custom Joinery Manufacturing',
     shortDescription:
-      'Custom commercial joinery manufactured in our Brisbane workshop and installed by our own tradespeople across SEQ.',
+      'Custom commercial joinery made in our own Brisbane workshop & installed by our tradespeople across SEQ — counters, cabinetry & shopfronts. Get a free quote.',
     description:
       'Our in-house joinery manufacturing capability means we control quality, lead times and costs. From reception counters and retail displays to kitchen cabinetry and feature walls, every piece is engineered to perform in a commercial environment.',
     icon: 'hammer',

@@ -91,7 +91,7 @@ export default function ServiceAreaPage({ params }: { params: { slug: string } }
       <section className="bg-cream py-20 sm:py-28">
         <div className="container mx-auto">
           <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-gray-400">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-gray-600">
               <li>
                 <Link href="/" className="hover:text-copper-600 transition-colors">
                   Home

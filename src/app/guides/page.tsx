@@ -6,7 +6,7 @@ import CTASection from '@/components/CTASection';
 export const metadata: Metadata = {
   title: 'Commercial Fitout Guides & Resources',
   description:
-    'Practical guides on commercial fitout costs, timelines and planning for Brisbane and SEQ businesses. Real facts, clear numbers, no fluff.',
+    'Practical guides on commercial fitout costs, timelines, cost per m² and project planning for Brisbane & SEQ businesses. Real numbers, clear advice, no fluff.',
   alternates: {
     canonical: '/guides',
   },
@@ -54,7 +54,7 @@ export default function GuidesPage() {
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-copper-50 text-copper-700 text-xs font-semibold">
                     {guide.category}
                   </span>
-                  <span className="text-xs font-medium text-gray-400">{guide.readTime}</span>
+                  <span className="text-xs font-medium text-gray-600">{guide.readTime}</span>
                 </div>
 
                 <h2 className="text-xl font-semibold text-charcoal mb-3 leading-snug">
@@ -65,9 +65,8 @@ export default function GuidesPage() {
                 <Link
                   href={`/guides/${guide.slug}`}
                   className="inline-flex items-center gap-1.5 mt-5 min-h-[44px] text-sm font-semibold text-copper-700 hover:text-copper-800 transition-colors group/link"
-                  aria-label={`Read guide: ${guide.title}`}
                 >
-                  Read guide
+                  Read guide<span className="sr-only">: {guide.title}</span>
                   <svg
                     className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1"
                     fill="none"

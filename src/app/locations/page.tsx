@@ -5,14 +5,19 @@ import { locations } from '@/data/locations';
 export const metadata: Metadata = {
   title: 'Service Areas | Shopfitting Across SEQ',
   description:
-    'QBCC licensed commercial shopfitting & fitouts across Brisbane, Gold Coast, Sunshine Coast, Ipswich & Toowoomba. Find your area & get a quote.',
+    'QBCC licensed commercial shopfitting & fitouts across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan, Toowoomba & regional Queensland. Get a free quote.',
   alternates: {
     canonical: '/locations',
   },
   openGraph: {
     title: 'Service Areas | Fix It Up Pty Ltd',
     description:
-      'Commercial shopfitting and fitout services across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan and Toowoomba.',
+      'Commercial shopfitting & fitouts across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan, Toowoomba & regional Queensland.',
+  },
+  twitter: {
+    title: 'Service Areas | Fix It Up Pty Ltd',
+    description:
+      'Commercial shopfitting & fitouts across Brisbane, Gold Coast, Sunshine Coast, Ipswich, Logan, Toowoomba & regional Queensland.',
   },
 };
 
@@ -111,7 +116,7 @@ export default function LocationsPage() {
 
                   {/* Bottom */}
                   <div className="flex items-center justify-between mt-6">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500">
                       <svg
                         className="w-3.5 h-3.5"
                         fill="none"
@@ -126,7 +131,7 @@ export default function LocationsPage() {
                           d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
                         />
                       </svg>
-                      {location.suburbs.length} suburbs covered
+                      {location.suburbs.length} areas covered
                     </span>
 
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-copper-600 group-hover:gap-2 transition-all duration-200">

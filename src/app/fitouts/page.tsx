@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     title: 'Fitouts by Location | Fix It Up Pty Ltd',
     description:
       'Curated commercial fitout service areas across Brisbane, the Gold Coast and the Sunshine Coast. Cafe, retail, office and medical fitouts.',
+    url: '/fitouts',
+  },
+  twitter: {
+    title: 'Fitouts by Location | Fix It Up Pty Ltd',
+    description:
+      'Curated commercial fitout service areas across Brisbane, the Gold Coast and the Sunshine Coast. Cafe, retail, office and medical fitouts.',
   },
 };
 
@@ -28,9 +34,24 @@ const grouped = locations
   }))
   .filter((group) => group.areas.length > 0);
 
+const BASE_URL = 'https://fixitup.au';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Fitouts by Location', item: `${BASE_URL}/fitouts` },
+  ],
+};
+
 export default function FitoutsIndexPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* -- Hero ------------------------------------------------------------ */}
       <section className="relative bg-cream overflow-hidden">
         <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />

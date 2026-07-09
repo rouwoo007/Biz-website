@@ -22,8 +22,21 @@ const heroImages = [
 ];
 
 export const metadata: Metadata = {
+  title: { absolute: 'Commercial Shopfitters Brisbane | Fix It Up Pty Ltd' },
+  description:
+    'QBCC-licensed commercial shopfitters in Brisbane. Cafe, retail, medical & office fitouts with joinery built in our own Sumner Park workshop. Free quote.',
   alternates: {
     canonical: '/',
+  },
+  openGraph: {
+    title: 'Commercial Shopfitters Brisbane | Fix It Up Pty Ltd',
+    description:
+      'QBCC licensed shopfitters delivering cafe, retail, office & medical fitouts across Brisbane and South East Queensland — design, in-house joinery and on-site build under one roof.',
+  },
+  twitter: {
+    title: 'Commercial Shopfitting, Joinery & Fitouts | Fix It Up Pty Ltd',
+    description:
+      'QBCC licensed cafe, retail, office & medical fitouts across Brisbane & SEQ — design, joinery manufacture and build under one roof.',
   },
 };
 
@@ -205,7 +218,7 @@ export default function HomePage() {
               className="animate-fade-up mt-7 text-[2.65rem] font-extrabold leading-[1.04] tracking-tight text-white text-balance sm:text-6xl xl:text-7xl"
               style={{ animationDelay: '0.15s' }}
             >
-              Commercial shopfitting &amp; joinery,{' '}
+              Commercial shopfitting &amp; joinery in Brisbane,{' '}
               <span className="relative whitespace-nowrap text-copper-400">
                 built to open on time.
                 <svg

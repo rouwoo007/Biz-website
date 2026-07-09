@@ -82,7 +82,7 @@ export default function ContactPage() {
                       </svg>
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
                         Address
                       </p>
                       <address className="not-italic text-sm text-charcoal/80 leading-relaxed">
@@ -113,7 +113,7 @@ export default function ContactPage() {
                         </svg>
                       </span>
                       <div>
-                        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
                           Phone
                         </p>
                         <a
@@ -144,7 +144,7 @@ export default function ContactPage() {
                       </svg>
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
                         {hasEmail ? 'Email' : 'Enquiries'}
                       </p>
                       {hasEmail ? (
@@ -168,13 +168,13 @@ export default function ContactPage() {
 
                 {/* Divider */}
                 <div className="mt-6 pt-6 border-t border-gray-200">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                     Business Hours
                   </p>
                   <p className="text-sm text-charcoal/70">
                     Monday – Friday &nbsp;·&nbsp; 7:00 am – 5:00 pm
                   </p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-500">
                     Closed weekends &amp; public holidays
                   </p>
                 </div>

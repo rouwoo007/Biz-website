@@ -5,13 +5,18 @@ import ServiceCard from '@/components/ServiceCard';
 import CTASection from '@/components/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Commercial Fitout & Shopfitting Brisbane',
+  title: { absolute: 'Commercial Fitout & Shopfitting Services in Brisbane & SEQ' },
   description:
     'Commercial shopfitting, joinery, retail, cafe, medical & office fitouts across Brisbane & SEQ. QBCC licensed. Request a free quote.',
   alternates: {
     canonical: '/services',
   },
   openGraph: {
+    title: 'Commercial Fitout & Shopfitting Brisbane | Fix It Up Pty Ltd',
+    description:
+      'Commercial shopfitting, joinery, retail, cafe, medical & office fitouts across Brisbane & SEQ. QBCC licensed.',
+  },
+  twitter: {
     title: 'Commercial Fitout & Shopfitting Brisbane | Fix It Up Pty Ltd',
     description:
       'Commercial shopfitting, joinery, retail, cafe, medical & office fitouts across Brisbane & SEQ. QBCC licensed.',
@@ -157,7 +162,7 @@ export default function ServicesPage() {
               <div key={label} className="flex flex-col items-center gap-2 px-4">
                 <span className="text-4xl font-extrabold text-white">{stat}</span>
                 <span className="text-base font-semibold text-white/90">{label}</span>
-                <p className="text-sm text-white/60 leading-relaxed">{detail}</p>
+                <p className="text-sm text-white/80 leading-relaxed">{detail}</p>
               </div>
             ))}
           </div>

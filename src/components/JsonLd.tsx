@@ -1,13 +1,16 @@
 import { company } from '@/data/company';
-import { testimonials } from '@/data/testimonials';
 
 const BASE_URL = 'https://fixitup.au';
 
 /**
  * Renders the structured-data entity graph for Fix It Up Pty Ltd as a single
- * JSON-LD @graph: a GeneralContractor LocalBusiness node, a WebSite node, and
- * customer reviews + aggregate rating. Place this inside a layout/page — it
- * outputs a <script type="application/ld+json"> tag search engines can read.
+ * JSON-LD @graph: a GeneralContractor LocalBusiness node and a WebSite node.
+ * Place this inside a layout/page — it outputs a
+ * <script type="application/ld+json"> tag search engines can read.
+ *
+ * Note: aggregateRating/review markup is intentionally omitted. Google does not
+ * surface self-authored (first-party) reviews as rich results; add review schema
+ * only when sourced from a genuine third-party platform.
  *
  * Contact data is sourced from src/data/company.ts, where phone/email may still
  * be bracketed placeholders. We omit those keys until real values are supplied.
@@ -24,9 +27,6 @@ export default function JsonLd() {
   const telephone = phoneDigits.startsWith('0')
     ? `+61${phoneDigits.slice(1)}`
     : company.phone;
-
-  const ratingValue =
-    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length;
 
   const business = {
     '@type': ['LocalBusiness', 'GeneralContractor', 'HomeAndConstructionBusiness'],
@@ -105,22 +105,6 @@ export default function JsonLd() {
         name: 'Queensland Building and Construction Commission',
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: ratingValue,
-      reviewCount: testimonials.length,
-      bestRating: 5,
-    },
-    review: testimonials.map((t) => ({
-      '@type': 'Review',
-      author: { '@type': 'Person', name: t.name },
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: t.rating,
-        bestRating: 5,
-      },
-      reviewBody: t.quote,
-    })),
     sameAs: [
       // Google Business Profile (resolved from the owner's share link)
       'https://www.google.com/search?kgmid=/g/11c42p_x3f',

@@ -53,7 +53,7 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <main>
+    <>
       {/* -- Hero ------------------------------------------------------------ */}
       <section className="bg-cream border-b border-gray-100">
         <div className="container mx-auto py-14 sm:py-20">
@@ -113,6 +113,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

@@ -13,7 +13,7 @@ export default function ProjectsPage() {
       : projects.filter((project) => project.type === activeFilter);
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="bg-cream py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -33,6 +33,8 @@ export default function ProjectsPage() {
       {/* Filter Bar + Grid */}
       <section className="py-12 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section heading (visually hidden — keeps h1 -> h2 -> h3 card order) */}
+          <h2 className="sr-only">Project portfolio</h2>
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-center mb-10">
             {filterCategories.map((category) => (
@@ -71,6 +73,6 @@ export default function ProjectsPage() {
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -4,7 +4,8 @@ export interface Project {
   slug: string;
   type: string;
   typeLabel: string;
-  floorplan: string;
+  /** Optional floorplan image. Not every project has one. */
+  floorplan?: string;
   photo: string;
   description: string;
 }
@@ -33,10 +34,8 @@ export const projects: Project[] = [
     slug: "cindy-chow",
     type: "retail",
     typeLabel: typeLabelMap["retail"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_264854d34649419e9cd46d16f2d32589~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_a9a6041dd1a040b2b3d4f86025347ca6~mv2.png",
+    floorplan: "/images/cindy-chow-floorplan.jpg",
+    photo: "/images/cindy-chow.png",
     description:
       "Complete retail shopfitting for Cindy Chow, including custom joinery, display fixtures, and branded signage. Delivered to a premium finish specification in Brisbane.",
   },
@@ -46,10 +45,8 @@ export const projects: Project[] = [
     slug: "cocobliss",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_df3b974c660e42b9aef0da93c7e9a0b0~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_df4c0094b9e34910875a2869640de691~mv2.jpeg",
+    floorplan: "/images/cocobliss-floorplan.jpg",
+    photo: "/images/cocobliss.jpeg",
     description:
       "Full hospitality fitout for Cocobliss featuring custom counter joinery, seating areas, and a welcoming customer experience space.",
   },
@@ -59,10 +56,8 @@ export const projects: Project[] = [
     slug: "the-matriarch",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_bf3bfab1403249ec90f8225bca8297b5~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_f7cce4e5bbc940a3a9a492a720482eab~mv2.jpeg",
+    floorplan: "/images/the-matriarch-floorplan.jpg",
+    photo: "/images/the-matriarch.jpeg",
     description:
       "Hospitality fitout for The Matriarch, encompassing full interior build, custom bar joinery, feature lighting, and bespoke furniture packages.",
   },
@@ -72,10 +67,8 @@ export const projects: Project[] = [
     slug: "ispa-kebab",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_49e87b1e229945c895d26845180f001f~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_fb3dfd58c90c4e1ab140df40bcdd35aa~mv2.jpg",
+    floorplan: "/images/ispa-kebab-floorplan.jpg",
+    photo: "/images/ispa-kebab.jpg",
     description:
       "Food and beverage fitout for ISPA Kebab including commercial kitchen installation, counter displays, signage, and customer seating area.",
   },
@@ -85,10 +78,8 @@ export const projects: Project[] = [
     slug: "kulture-kebab",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_d03ebc0d449f406b8fedd3700e299503~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_4052ed5542e64ff49a3c9f27a73ae0c3~mv2.jpg",
+    floorplan: "/images/kulture-kebab-floorplan.jpg",
+    photo: "/images/kulture-kebab.jpg",
     description:
       "Complete food and beverage shopfitting for Kulture Kebab with custom joinery, commercial kitchen setup, and branded interior finishes.",
   },
@@ -98,10 +89,8 @@ export const projects: Project[] = [
     slug: "andersens-flooring",
     type: "retail",
     typeLabel: typeLabelMap["retail"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_66beb7cf4ded404ea9835f8892891b77~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_46c2ee710b6d4b7ea599045fae80cd65~mv2.jpg",
+    floorplan: "/images/andersens-flooring-floorplan.jpg",
+    photo: "/images/andersens-flooring.jpg",
     description:
       "Retail showroom fitout for Andersens Flooring featuring product display systems, custom cabinetry, consultation areas, and branded shopfront signage.",
   },
@@ -111,10 +100,8 @@ export const projects: Project[] = [
     slug: "little-locals",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_8f4775294be443f097555d3e2f21c215~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_e591d6e71f5e46f69d585b51a7f09f08~mv2.jpeg",
+    floorplan: "/images/little-locals-floorplan.jpg",
+    photo: "/images/little-locals.jpeg",
     description:
       "Hospitality fitout for Little Locals including full interior build, custom counter and service area joinery, and a warm, inviting design palette.",
   },
@@ -124,10 +111,8 @@ export const projects: Project[] = [
     slug: "soul-pantry",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_90f7d5c7560a46f2ae876e453167b850~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_a6e57ee4a5fd4f338dbfedb41e636f7d~mv2.jpg",
+    floorplan: "/images/soul-pantry-floorplan.jpg",
+    photo: "/images/soul-pantry.jpg",
     description:
       "Full hospitality fitout for Soul Pantry with bespoke joinery, feature walls, commercial kitchen equipment, and customer dining area.",
   },
@@ -137,10 +122,8 @@ export const projects: Project[] = [
     slug: "metro-medical-centre",
     type: "medical",
     typeLabel: typeLabelMap["medical"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_a2643771c94c49a5bbd3a56ce04822bb~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_b645296c38e446e89662080bf44a5196~mv2.jpeg",
+    floorplan: "/images/metro-medical-centre-floorplan.jpg",
+    photo: "/images/metro-medical-centre.jpeg",
     description:
       "Medical centre fitout including compliant consultation rooms, reception area, waiting room, and treatment spaces built to health infrastructure standards.",
   },
@@ -150,12 +133,21 @@ export const projects: Project[] = [
     slug: "melt-brothers-chermside",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_f638edb0be0449fc98413a85f9302271~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_8683d42c8e1c48debac328572499e8cf~mv2.jpg",
+    floorplan: "/images/melt-brothers-chermside-floorplan.jpg",
+    photo: "/images/melt-brothers-chermside.jpg",
     description:
       "Food and beverage fitout for Melt Brothers at Chermside including custom counter, commercial kitchen, branded interior elements, and seating.",
+  },
+  {
+    id: 25,
+    name: "Big",
+    slug: "big",
+    type: "hospitality",
+    typeLabel: typeLabelMap["hospitality"],
+    floorplan: "/images/big-floorplan.jpg",
+    photo: "/images/big.jpg",
+    description:
+      "Complete hospitality fitout for Big, featuring custom counter and service joinery, commercial kitchen installation, branded interior finishes, and a welcoming customer area.",
   },
   {
     id: 24,
@@ -163,10 +155,8 @@ export const projects: Project[] = [
     slug: "hawkers-lane",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_93413117c929437e801f6d39cb39eb46~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_e68fed9b5f824745b0d802e0fa0bce77~mv2.jpg",
+    floorplan: "/images/hawkers-lane-floorplan.jpg",
+    photo: "/images/hawkers-lane.jpg",
     description:
       "Complete food hall fitout for Hawkers Lane with vendor stalls, shared seating precinct, custom joinery, and integrated signage systems.",
   },
@@ -176,10 +166,8 @@ export const projects: Project[] = [
     slug: "healing-stone",
     type: "wellness",
     typeLabel: typeLabelMap["wellness"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_a87f54292c3d4885b868c4df18788a9b~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_bf6eae44d6fe439f8f3217e98e3d814d~mv2.jpg",
+    floorplan: "/images/healing-stone-floorplan.jpg",
+    photo: "/images/healing-stone.jpg",
     description:
       "Wellness studio fitout for Healing Stone featuring treatment rooms, reception joinery, calming interior finishes, and a relaxing client experience space.",
   },
@@ -189,10 +177,8 @@ export const projects: Project[] = [
     slug: "mister-cuts",
     type: "retail",
     typeLabel: typeLabelMap["retail"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_4ff11149025d45d0a2f264b402075f52~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_2dca920d709940c5ad999bf5902d1d66~mv2.jpg",
+    floorplan: "/images/mister-cuts-floorplan.jpg",
+    photo: "/images/mister-cuts.jpg",
     description:
       "Retail fitout for Mister Cuts including custom cabinetry, workstations, reception counter, and branded interior design.",
   },
@@ -202,10 +188,8 @@ export const projects: Project[] = [
     slug: "origin-kebabs",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_07a83a9453e943029b6c092e8eebe647~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_bf0b87f0cf164520b7de96f260005fad~mv2.jpg",
+    floorplan: "/images/origin-kebabs-floorplan.jpg",
+    photo: "/images/origin-kebabs.jpg",
     description:
       "Food and beverage shopfitting for Origin Kebabs featuring commercial kitchen, custom service counter, menu displays, and customer seating.",
   },
@@ -215,10 +199,8 @@ export const projects: Project[] = [
     slug: "turquoise-kebab",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_a44f2463eddd4a7d9769fe81b60fa18b~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_df5acce2eff142aca901b7a0f5dd170b~mv2.jpg",
+    floorplan: "/images/turquoise-kebab-floorplan.jpg",
+    photo: "/images/turquoise-kebab.jpg",
     description:
       "Complete fitout for Turquoise Kebab including custom joinery, commercial cooking equipment installation, branded signage, and customer area.",
   },
@@ -228,10 +210,8 @@ export const projects: Project[] = [
     slug: "7-cup",
     type: "cafe",
     typeLabel: typeLabelMap["cafe"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_1224f5e3b6b847b9aefa960d5f11422f~mv2.jpg",
+    floorplan: "/images/7-cup-floorplan.jpg",
+    photo: "/images/7-cup.jpg",
     description:
       "Cafe fitout for 7 Cup featuring custom brew bar joinery, espresso machine installation, seating area, and warm interior finishes.",
   },
@@ -241,10 +221,8 @@ export const projects: Project[] = [
     slug: "origin-kebab",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_a98128008199463ba52f2f585f1e0c93~mv2.jpg",
-    photo:
-      "https://static.wixstatic.com/media/27e9c0_327f575e36da49abb0087b231c3cbf73~mv2.jpg",
+    floorplan: "/images/origin-kebab-floorplan.jpg",
+    photo: "/images/origin-kebab.jpg",
     description:
       "Food and beverage fitout for Origin Kebab with full kitchen build, service counter, customer area, and branded interior elements.",
   },
@@ -254,10 +232,7 @@ export const projects: Project[] = [
     slug: "hey-tea",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
-    photo:
-      "/images/hero-fitout.jpg",
+    photo: "/images/hero-fitout.webp",
     description:
       "Full hospitality fitout for Hey Tea featuring custom counter joinery, tea preparation area, interior finishes, and a welcoming customer experience space.",
   },
@@ -267,10 +242,7 @@ export const projects: Project[] = [
     slug: "cafe-107",
     type: "cafe",
     typeLabel: typeLabelMap["cafe"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
-    photo:
-      "/images/Curva_107 Coffee_1.jpg",
+    photo: "/images/Curva_107 Coffee_1.webp",
     description:
       "Complete cafe fitout for Cafe 107 including espresso bar joinery, commercial kitchen installation, customer seating area, and modern interior design.",
   },
@@ -280,10 +252,7 @@ export const projects: Project[] = [
     slug: "roro",
     type: "hospitality",
     typeLabel: typeLabelMap["hospitality"],
-    floorplan:
-      "https://static.wixstatic.com/media/27e9c0_1e28ea330e5b4d17856922b3c84c2526~mv2.jpg",
-    photo:
-      "/images/DSC00398.jpg",
+    photo: "/images/DSC00398.webp",
     description:
       "Hospitality fitout for RoRo featuring custom bar and counter joinery, commercial kitchen setup, branded interior finishes, and dining area.",
   },

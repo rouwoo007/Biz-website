@@ -89,7 +89,7 @@ const labelFor = (options: { value: string; label: string }[], value: string) =>
 // --- Shared style helpers ----------------------------------------------------
 
 const inputBase =
-  'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-copper-500 transition-colors';
+  'block w-full rounded-lg border px-4 py-3 text-sm text-charcoal placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-copper-500 transition-colors';
 const inputNormal = `${inputBase} bg-white border-gray-200 hover:border-gray-300 focus:border-copper-500`;
 const inputError = `${inputBase} bg-white border-red-300 focus:ring-red-400`;
 const labelBase = 'block text-sm font-medium text-charcoal/80 mb-1.5';
@@ -202,7 +202,7 @@ function Step1({
       <div>
         <label htmlFor="q-company" className={labelBase}>
           Company{' '}
-          <span className="text-gray-400 font-normal">(optional)</span>
+          <span className="text-gray-500 font-normal">(optional)</span>
         </label>
         <input
           id="q-company"
@@ -323,7 +323,7 @@ function Step2({
       <div>
         <label htmlFor="q-site-address" className={labelBase}>
           Full Site Address{' '}
-          <span className="text-gray-400 font-normal">(if known)</span>
+          <span className="text-gray-500 font-normal">(if known)</span>
         </label>
         <input
           id="q-site-address"
@@ -333,7 +333,7 @@ function Step2({
           className={inputNormal}
           {...register('siteAddress')}
         />
-        <p className="mt-1.5 text-xs text-gray-400">
+        <p className="mt-1.5 text-xs text-gray-500">
           The exact address of the property or tenancy where the work will take place.
         </p>
       </div>
@@ -429,7 +429,7 @@ function Step3({
       <div>
         <label htmlFor="q-description" className={labelBase}>
           Project Description{' '}
-          <span className="text-gray-400 font-normal">(optional)</span>
+          <span className="text-gray-500 font-normal">(optional)</span>
         </label>
         <textarea
           id="q-description"
@@ -446,7 +446,7 @@ function Step3({
       <div>
         <p className={labelBase}>
           Attachments{' '}
-          <span className="text-gray-400 font-normal">(optional)</span>
+          <span className="text-gray-500 font-normal">(optional)</span>
         </p>
         <div className="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-gray-200 bg-cream px-6 py-8 text-center cursor-pointer hover:border-copper-300 transition-colors group">
           <div className="w-10 h-10 rounded-full bg-copper-50 flex items-center justify-center group-hover:bg-copper-100 transition-colors">
@@ -469,7 +469,7 @@ function Step3({
               Drag &amp; drop files here, or{' '}
               <span className="text-copper-600">browse</span>
             </p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               Plans, drawings, photos — PDF, PNG, JPG up to 20 MB
             </p>
           </div>

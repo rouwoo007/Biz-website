@@ -19,7 +19,8 @@ export async function generateMetadata({
   const location = getLocationBySlug(params.slug);
   if (!location) return {};
 
-  const shortDesc = `QBCC licensed commercial shopfitting & joinery in ${location.name}. Fix It Up delivers fitouts for retail, hospitality, medical & office spaces.`;
+  const topSuburbs = location.suburbs.slice(0, 3).join(', ');
+  const shortDesc = `QBCC licensed commercial shopfitting & joinery in ${location.name} — fitouts for retail, hospitality, medical & office across ${topSuburbs}.`;
   return {
     title: { absolute: `Shopfitting ${location.name} | Commercial Fitout & Joinery` },
     description: shortDesc,
@@ -110,6 +111,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -147,6 +149,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2.5}
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
@@ -195,6 +198,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
                     className="w-3.5 h-3.5 flex-shrink-0 text-copper-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
+                    aria-hidden="true"
                   >
                     <path
                       fillRule="evenodd"
@@ -236,6 +240,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                       strokeWidth={2.5}
+                      aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
